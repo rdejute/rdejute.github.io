@@ -1,0 +1,21 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.layout__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: calc(var(--space) * 5) calc(var(--space) * 2.5);
+}
+
+@media (max-width: 768px) {
+  .layout__main {
+    padding: calc(var(--space) * 3) calc(var(--space) * 2);
+    /* Clear the fixed bottom nav bar so content isn't hidden behind it. */
+    padding-bottom: calc(var(--space) * 11);
+  }
+}
