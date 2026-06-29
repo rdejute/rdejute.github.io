@@ -9,11 +9,11 @@
 
 **Goal:** Stand up the project's foundation so every later feature has a working, live deploy
 pipeline and a configured backend to talk to. By the end of this feature, a near-empty React app is
-publicly live at `https://username.github.io`, auto-deploys on push to `main`, and a Supabase
+publicly live at `https://rdejute.github.io`, auto-deploys on push to `main`, and a Supabase
 backend (database + auth + admin user) is ready to receive data.
 
 **In scope:**
-- Public GitHub repo named `username.github.io`, with all coaches added as collaborators.
+- Public GitHub repo named `rdejute.github.io`, with all coaches added as collaborators.
 - Branch model: `main` / `dev` / `feature/*`.
 - React + Vite (JavaScript) scaffold.
 - `vite.config.js` with `base: '/'`.
@@ -50,10 +50,10 @@ backend (database + auth + admin user) is ready to receive data.
   the `feature → dev → main` flow.
 
 ### B. Application Scaffold
-- Scaffold with `npm create vite@latest username.github.io`, framework **React**, variant
+- Scaffold with `npm create vite@latest rdejute.github.io`, framework **React**, variant
   **JavaScript**.
 - Set `base: '/'` in `vite.config.js` (root-repo deployment).
-- Confirm the app loads at `https://username.github.io`.
+- Confirm the app loads at `https://rdejute.github.io`.
 
 ### C. CI/CD Deployment
 - Workflow file exists at `.github/workflows/deploy.yml`.
@@ -91,7 +91,7 @@ backend (database + auth + admin user) is ready to receive data.
 work on feature/*  →  merge into dev  →  merge dev into main
         └─ push to main triggers deploy.yml
               └─ npm ci → npm run build → publish dist/ to GitHub Pages
-                    └─ live at https://username.github.io
+                    └─ live at https://rdejute.github.io
 ```
 
 **Runtime data path** (no server in between)

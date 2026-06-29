@@ -1,0 +1,17 @@
+# Supabase project config. Edit project_id to match your linked project ref
+# (Dashboard → Project Settings → General), or run `supabase link`.
+project_id = "rdejute-portfolio"
+
+# --- Edge Functions -----------------------------------------------------------
+# `verify_jwt` controls whether the Edge runtime requires a valid user JWT
+# BEFORE the function runs. For @supabase/server { auth: "user" } handlers,
+# keep it true. For "publishable" / "secret" / "none" auth modes, set it to
+# false so the function runs and lets withSupabase do the key/JWT check itself.
+
+[functions.messages]
+verify_jwt = true
+# JavaScript entrypoint (the CLI defaults to index.ts otherwise).
+entrypoint = "./functions/messages/index.js"
+
+[functions.public-ping]
+verify_jwt = false

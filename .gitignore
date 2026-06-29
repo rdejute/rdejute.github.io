@@ -17,6 +17,11 @@ dist-ssr
 .env.*
 !.env.example
 
+# Supabase Edge Function secrets (incl. SUPABASE_SECRET_KEY) — never commit
+supabase/.env
+supabase/functions/.env
+supabase/.temp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
