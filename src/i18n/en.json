@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "aria": "Primary navigation",
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "links": "Links",
+    "contact": "Contact"
+  },
+  "logo": {
+    "alt": "Raina DeJute — home"
+  },
+  "controls": {
+    "theme": "Toggle light and dark theme",
+    "language": "Switch language"
+  },
+  "footer": {
+    "tagline": "Empathy is my framework.",
+    "contactHeading": "Get in touch",
+    "emailLabel": "Email Raina",
+    "social": "Find me online",
+    "rights": "All rights reserved."
+  },
+  "pages": {
+    "home": { "title": "Home", "placeholder": "Home content coming soon." },
+    "portfolio": { "title": "Portfolio", "placeholder": "Portfolio content coming soon." },
+    "links": { "title": "Links", "placeholder": "Links content coming soon." },
+    "contact": { "title": "Contact", "placeholder": "Contact content coming soon." }
+  }
+}

@@ -1,0 +1,39 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: calc(var(--space) * 1.25) calc(var(--space) * 2.5);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space) * 2);
+}
+
+/* Push the controls to the far right; nav sits centered between. */
+.site-header__inner > .nav--top {
+  margin-left: auto;
+}
+
+.site-header__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+@media (max-width: 768px) {
+  .site-header__inner {
+    padding: var(--space) calc(var(--space) * 1.5);
+    gap: var(--space);
+  }
+
+  /* With the top-nav hidden on mobile, push controls right of the logo. */
+  .site-header__controls {
+    margin-left: auto;
+  }
+}

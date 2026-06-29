@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "aria": "Navigation principale",
+    "home": "Accueil",
+    "portfolio": "Portfolio",
+    "links": "Liens",
+    "contact": "Contact"
+  },
+  "logo": {
+    "alt": "Raina DeJute — accueil"
+  },
+  "controls": {
+    "theme": "Basculer le thème clair et sombre",
+    "language": "Changer de langue"
+  },
+  "footer": {
+    "tagline": "L'empathie est mon cadre de travail.",
+    "contactHeading": "Me contacter",
+    "emailLabel": "Écrire à Raina",
+    "social": "Me retrouver en ligne",
+    "rights": "Tous droits réservés."
+  },
+  "pages": {
+    "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },
+    "portfolio": { "title": "Portfolio", "placeholder": "Contenu du portfolio à venir." },
+    "links": { "title": "Liens", "placeholder": "Contenu des liens à venir." },
+    "contact": { "title": "Contact", "placeholder": "Contenu du contact à venir." }
+  }
+}
