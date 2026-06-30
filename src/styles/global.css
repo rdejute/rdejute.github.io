@@ -66,6 +66,43 @@ button {
   cursor: pointer;
 }
 
+/* Shared button component (used by CTAs and elsewhere). */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.75);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  padding: calc(var(--space) * 1.25) calc(var(--space) * 2.25);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Solid fill reserved for the primary action; deep sage keeps text readable
+   in both themes (deep sage + surface flip oppositely). */
+.btn--primary {
+  background: var(--accent-cool-deep);
+  color: var(--surface);
+}
+
+.btn--primary:hover {
+  background: var(--accent-cool);
+  text-decoration: none;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--accent-cool);
+  color: var(--accent-cool-deep);
+}
+
+.btn--ghost:hover {
+  background: var(--accent-cool-tint);
+  text-decoration: none;
+}
+
 /* Visible focus for keyboard users across all interactive elements. */
 :focus-visible {
   outline: 2px solid var(--accent-cool);

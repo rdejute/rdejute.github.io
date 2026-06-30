@@ -9,7 +9,9 @@ export default function Logo({ onClick }) {
   const { t } = useLanguage()
   return (
     <button type="button" className="logo" onClick={onClick} aria-label={t('logo.alt')}>
-      <img className="logo__img" src={logoRd} alt="" width="44" height="44" />
+      <span className="logo__ring">
+        <img className="logo__img" src={logoRd} alt="" width="44" height="44" />
+      </span>
     </button>
   )
 }

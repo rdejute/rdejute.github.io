@@ -1,0 +1,55 @@
+.skill-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--space) * 3);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 1.5);
+  height: 100%;
+  transition: box-shadow 0.25s ease;
+}
+
+/* Glow-intensity increase on hover (a sage bloom shadow; not motion). */
+.skill-card:hover {
+  box-shadow: 0 8px 26px -12px var(--accent-cool);
+}
+
+/* Gentle hover lift — motion, so only when motion is welcome. */
+@media (prefers-reduced-motion: no-preference) {
+  .skill-card {
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.skill-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--accent-cool-tint);
+  color: var(--accent-cool);
+}
+
+.skill-card__glyph {
+  width: 26px;
+  height: 26px;
+}
+
+.skill-card__title {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.skill-card__desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
