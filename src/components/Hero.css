@@ -1,0 +1,142 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: calc(var(--space) * 5);
+  align-items: center;
+  padding: calc(var(--space) * 4) 0 calc(var(--space) * 6);
+}
+
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin: 0 0 calc(var(--space) * 1.5);
+}
+
+.hero__name {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin: 0 0 calc(var(--space) * 1.5);
+}
+
+.hero__role {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 var(--space);
+}
+
+.hero__tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--accent-warm);
+  margin: 0 0 calc(var(--space) * 2);
+}
+
+.hero__intro {
+  color: var(--text-muted);
+  max-width: 52ch;
+  margin: 0 0 calc(var(--space) * 3);
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space);
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space);
+}
+
+.hero__chip {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: calc(var(--space) * 0.5) calc(var(--space) * 1.25);
+}
+
+.hero__media {
+  display: flex;
+  justify-content: center;
+}
+
+/* Frame carries the glow (an <img> can't host a ::before). */
+.hero__portrait-frame {
+  display: inline-block;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 50%; /* oval — the glow inherits this radius */
+}
+
+/* Stronger, more opaque glow behind the portrait (the cards stay ambient).
+   Denser sage core + a higher opacity range than the shared .glow default. */
+.hero__portrait-frame.glow::before {
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent-cool) 85%, transparent),
+    transparent
+  );
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__portrait-frame.glow::before {
+    animation: portrait-glow-breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes portrait-glow-breathe {
+    0%,
+    100% {
+      opacity: 0.7;
+      transform: scale(0.98);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.04);
+    }
+  }
+}
+
+/* Clips the photo to the oval (kept on a separate layer from the glow frame,
+   which can't use overflow:hidden without clipping its glow). */
+.hero__portrait-clip {
+  aspect-ratio: 44 / 54; /* same proportions as before — oval unchanged */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.hero__portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Nudge the photo right inside the fixed oval so the head sits centered.
+     The slight scale keeps the left edge covered while it shifts. */
+  transform: translate(6%, 4%) scale(1.12);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space) * 3);
+    padding: calc(var(--space) * 2) 0 calc(var(--space) * 4);
+  }
+
+  /* Portrait first on mobile, above the text. */
+  .hero__media {
+    order: -1;
+  }
+
+  .hero__portrait-frame {
+    max-width: 320px;
+  }
+}

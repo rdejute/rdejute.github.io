@@ -25,7 +25,7 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
         <Main current={view} onNavigate={setView}>
-          <Page />
+          <Page onNavigate={setView} />
         </Main>
       </LanguageProvider>
     </ThemeProvider>

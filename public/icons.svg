@@ -51,4 +51,44 @@
   <symbol id="social-linkedin" viewBox="0 0 24 24">
     <path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.64h.05c.53-.95 1.82-1.95 3.75-1.95 4.01 0 4.75 2.4 4.75 5.52V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9V9Z"/>
   </symbol>
+  <symbol id="code-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8 9-3 3 3 3M16 9l3 3-3 3M13.5 6.5l-3 11"/>
+  </symbol>
+  <symbol id="server-icon" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <rect x="3" y="13" width="18" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="7" cy="7.5" r="1" fill="currentColor"/>
+    <circle cx="7" cy="16.5" r="1" fill="currentColor"/>
+  </symbol>
+  <symbol id="database-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3c4.42 0 8 1.34 8 3s-3.58 3-8 3-8-1.34-8-3 3.58-3 8-3Z"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>
+  </symbol>
+  <symbol id="sparkles-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3Z"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14Z"/>
+  </symbol>
+  <symbol id="heart-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 20s-7-4.35-7-9.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7 3.5C19 15.65 12 20 12 20Z"/>
+  </symbol>
+  <symbol id="compass-icon" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/>
+  </symbol>
+  <symbol id="refresh-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 0 0-14-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14 4.5L20 16M20 20v-4h-4"/>
+  </symbol>
+  <symbol id="users-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M16 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 17.5V19"/>
+    <circle cx="9.5" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M20 19v-1.5a3.5 3.5 0 0 0-2.6-3.38M15.5 5.2a3.2 3.2 0 0 1 0 5.6"/>
+  </symbol>
+  <symbol id="chat-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-5.4A8 8 0 1 1 21 11.5Z"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8.5 10.5h7M8.5 13.5h4.5"/>
+  </symbol>
+  <symbol id="shield-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3Z"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/>
+  </symbol>
 </svg>

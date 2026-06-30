@@ -20,6 +20,68 @@
     "social": "Find me online",
     "rights": "All rights reserved."
   },
+  "home": {
+    "eyebrow": "Front-end first · Empathy-led",
+    "name": "Raina DeJute",
+    "role": "AI-native full-stack developer with a front-end heart",
+    "tagline": "Empathy is my framework.",
+    "intro": "Full-stack developer, front-end focused. I came up through human services before tech, and I bring that same discipline to delivery — shipping projects on time, scoped to what the client actually needs, not what's easy to build. React on the front, Spring Boot and Node behind it, AI-native from spec to ship.",
+    "ctaWork": "View my work",
+    "ctaContact": "Get in touch",
+    "portraitAlt": "Portrait of Raina DeJute",
+    "chips": {
+      "a": "Front-end first",
+      "b": "Empathy-led",
+      "c": "AI-native workflow"
+    },
+    "tech": {
+      "heading": "What I build with",
+      "intro": "A pragmatic, full-stack toolkit — chosen to fit the problem, not to pad a résumé."
+    },
+    "soft": {
+      "heading": "What I bring to a team",
+      "intro": "The human skills that came before the technical ones — and still lead the way."
+    },
+    "why": {
+      "heading": "Why I Build",
+      "body": "Before I wrote code, I spent years in human services — walking with people through recovery, crisis, and starting over. I learned to hear what someone needs before they can say it, and to build the conditions for them to feel safe. I do the same work now with different tools: I shape an interface the way I once arranged a room — so the person on the other side feels seen, and a little less stuck. That instinct is the throughline from who I was to what I build.",
+      "imageAlt": "Warm illustration of two people connecting"
+    },
+    "skills": {
+      "frontend": {
+        "title": "React & React Native",
+        "desc": "I build responsive, accessible interfaces in React — and take them cross-platform with React Native when a project needs to live on a phone."
+      },
+      "backend": {
+        "title": "Spring Boot & Node",
+        "desc": "On the server I design APIs in Spring Boot and Node that are predictable, documented, and kind to the next developer."
+      },
+      "data": {
+        "title": "SQL & MongoDB",
+        "desc": "I model data in both relational SQL and document-based MongoDB, choosing the shape that fits the problem instead of forcing one."
+      },
+      "ai": {
+        "title": "AI-native, spec-driven",
+        "desc": "I work spec-first with AI as a collaborator — writing clear specifications, then iterating on them so the code stays intentional, not improvised."
+      },
+      "resilience": {
+        "title": "Resilience",
+        "desc": "I've started over more than once and rebuilt with intention. Hard problems don't rattle me — they focus me."
+      },
+      "communication": {
+        "title": "Communication",
+        "desc": "Years of sitting with people in hard conversations taught me to be clear, calm, and honest — to raise a blocker early and explain a tradeoff without the jargon."
+      },
+      "accountability": {
+        "title": "Accountability",
+        "desc": "I work AI-native, but I own every line. I read what I generate, make sure I understand it, and take responsibility for what ships. The tool accelerates me; it doesn't excuse me."
+      },
+      "selfDirection": {
+        "title": "Self-direction",
+        "desc": "I don't wait to be handed a problem. I built a crypto risk dashboard and a route-aware grocery tool on my own — because I saw a need and started."
+      }
+    }
+  },
   "pages": {
     "home": { "title": "Home", "placeholder": "Home content coming soon." },
     "portfolio": { "title": "Portfolio", "placeholder": "Portfolio content coming soon." },

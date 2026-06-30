@@ -20,6 +20,68 @@
     "social": "Me retrouver en ligne",
     "rights": "Tous droits réservés."
   },
+  "home": {
+    "eyebrow": "Le front-end d'abord · Guidée par l'empathie",
+    "name": "Raina DeJute",
+    "role": "Développeuse full-stack native de l'IA, au cœur front-end",
+    "tagline": "L'empathie est mon cadre de travail.",
+    "intro": "Développeuse full-stack, axée front-end. Je viens des services à la personne, avant la tech, et j'apporte cette même rigueur à la livraison — des projets livrés à temps, cadrés sur ce dont le client a réellement besoin, pas sur ce qui est facile à construire. React à l'avant, Spring Boot et Node derrière, native de l'IA, de la spec à la livraison.",
+    "ctaWork": "Voir mon travail",
+    "ctaContact": "Me contacter",
+    "portraitAlt": "Portrait de Raina DeJute",
+    "chips": {
+      "a": "Le front-end d'abord",
+      "b": "Guidée par l'empathie",
+      "c": "Flux de travail natif de l'IA"
+    },
+    "tech": {
+      "heading": "Mes outils",
+      "intro": "Une boîte à outils full-stack pragmatique — choisie pour répondre au problème, pas pour gonfler un CV."
+    },
+    "soft": {
+      "heading": "Ce que j'apporte à une équipe",
+      "intro": "Les compétences humaines venues avant les compétences techniques — et qui ouvrent toujours la voie."
+    },
+    "why": {
+      "heading": "Pourquoi je construis",
+      "body": "Avant d'écrire du code, j'ai passé des années dans les services à la personne — à accompagner des gens à travers le rétablissement, la crise et les nouveaux départs. J'ai appris à entendre ce dont quelqu'un a besoin avant même qu'il puisse le dire, et à créer les conditions pour qu'il se sente en sécurité. Je fais le même travail aujourd'hui avec d'autres outils : je façonne une interface comme j'arrangeais autrefois une pièce — pour que la personne de l'autre côté se sente vue, et un peu moins coincée. Cet instinct est le fil conducteur entre qui j'étais et ce que je construis.",
+      "imageAlt": "Illustration chaleureuse de deux personnes qui se rejoignent"
+    },
+    "skills": {
+      "frontend": {
+        "title": "React et React Native",
+        "desc": "Je construis des interfaces réactives et accessibles en React — et je les rends multiplateformes avec React Native quand un projet doit vivre sur un téléphone."
+      },
+      "backend": {
+        "title": "Spring Boot et Node",
+        "desc": "Côté serveur, je conçois des API en Spring Boot et Node qui sont prévisibles, documentées et agréables pour la prochaine personne qui développe."
+      },
+      "data": {
+        "title": "SQL et MongoDB",
+        "desc": "Je modélise les données en SQL relationnel comme en MongoDB orienté documents, en choisissant la forme qui convient au problème plutôt que d'en imposer une."
+      },
+      "ai": {
+        "title": "Natif de l'IA, piloté par les specs",
+        "desc": "Je travaille spec d'abord, avec l'IA comme collaboratrice — j'écris des spécifications claires, puis je les itère pour que le code reste intentionnel et non improvisé."
+      },
+      "resilience": {
+        "title": "Résilience",
+        "desc": "J'ai recommencé à zéro plus d'une fois et reconstruit avec intention. Les problèmes difficiles ne me déstabilisent pas — ils me concentrent."
+      },
+      "communication": {
+        "title": "Communication",
+        "desc": "Des années à accompagner des gens dans des conversations difficiles m'ont appris à être claire, calme et honnête — à signaler un blocage tôt et à expliquer un compromis sans jargon."
+      },
+      "accountability": {
+        "title": "Responsabilité",
+        "desc": "Je travaille de façon native avec l'IA, mais j'assume chaque ligne. Je lis ce que je génère, je m'assure de le comprendre et je réponds de ce qui est livré. L'outil m'accélère ; il ne m'excuse pas."
+      },
+      "selfDirection": {
+        "title": "Autonomie",
+        "desc": "Je n'attends pas qu'on me confie un problème. J'ai construit seule un tableau de bord de risque crypto et un outil d'épicerie tenant compte de l'itinéraire — parce que j'ai vu un besoin et que je m'y suis mise."
+      }
+    }
+  },
   "pages": {
     "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },
     "portfolio": { "title": "Portfolio", "placeholder": "Contenu du portfolio à venir." },
