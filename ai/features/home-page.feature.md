@@ -51,7 +51,9 @@ sage glow and scroll-reveal) gives the page life without noise.
 - Primary CTAs ("View my work →" → Portfolio, "Get in touch" → Contact) that switch the active view
   via the app-level view state (no URL change).
 - The hero portrait is an AI image (counts toward the two-image requirement) and carries the glow +
-  optional "lift" treatment (see §2.H).
+  optional "lift" treatment (see §2.H). It is a **single** photo file, **graded per theme** via CSS
+  only: untouched in dark, and cooled/softened in light so it doesn't read too warm against the tan
+  background (see §2.H).
 - *Optional, from the mockup:* small stat chips. Content is Raina's choice; lives in i18n.
 
 ### C. "Why I Build" (testimony / about)
@@ -107,6 +109,12 @@ sage glow and scroll-reveal) gives the page life without noise.
   reveal. Stagger cards in a row by ~60–90ms each.
 - **Reduced motion:** all of the above is wrapped in `@media (prefers-reduced-motion: no-preference)`.
   Under `reduce`, glows are static and all content renders visible immediately with no transform.
+- **Per-theme portrait grade (CSS-filter only, one photo file):** the dark theme uses the original
+  image untouched (`filter: none`). In **light** theme the hero `<img>` gets a CSS `filter` that
+  cools and softens it (reduce saturation/warmth, slightly lower contrast) so it sits naturally on
+  the tan background — tuned so skin tones stay natural (no grey/green shift). A ~200ms `filter`
+  transition smooths the change when toggling themes. This owns only the `filter` property; the glow,
+  breathing animation, `alt`, and reduced-motion behavior are unchanged.
 - *Optional phase-2 (not required):* an iOS-style "lift the subject" treatment on the portrait
   (transparent-PNG cutout layered over a dimmed background with a sage silhouette edge-glow).
 

@@ -122,6 +122,15 @@
   /* Nudge the photo right inside the fixed oval so the head sits centered.
      The slight scale keeps the left edge covered while it shifts. */
   transform: translate(6%, 4%) scale(1.12);
+  /* Light theme (default): cool + soften the warm photo so it sits on the tan
+     background. Dark theme leaves it untouched (override below). */
+  filter: saturate(0.88) contrast(0.94) brightness(1.02) hue-rotate(-6deg);
+  transition: filter 200ms ease;
+}
+
+/* Dark theme: original photo, no grade. */
+[data-theme="dark"] .hero__portrait {
+  filter: none;
 }
 
 @media (max-width: 768px) {
