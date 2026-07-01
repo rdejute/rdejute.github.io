@@ -82,6 +82,58 @@
       }
     }
   },
+  "portfolio": {
+    "heading": "Portfolio",
+    "intro": "Formation, expérience et quelques réalisations. Le CV ci-dessous reprend le contenu de cette page.",
+    "resume": "Télécharger le CV (PDF)",
+    "education": { "heading": "Formation" },
+    "work": { "heading": "Expérience" },
+    "projects": {
+      "heading": "Projets",
+      "intro": "Un mélange de projets de type client et de choses que j'ai construites parce que j'en voyais le besoin."
+    },
+    "edu": {
+      "codeboxx": { "title": "Programme de développement full-stack", "org": "CodeBoxx Academy", "dates": "mars 2026 – juill. 2026" },
+      "crps": { "title": "Spécialiste certifiée du soutien par les pairs en rétablissement", "org": "Certification en soutien par les pairs", "dates": "2025" },
+      "diploma": { "title": "Diplôme d'études secondaires", "org": "Formation générale", "dates": "2016" }
+    },
+    "jobs": {
+      "coordinator": {
+        "title": "Coordonnatrice de la réussite étudiante",
+        "org": "CodeBoxx Academy",
+        "dates": "2026 – présent",
+        "desc": "J'accompagne les étudiant·es dans un programme full-stack intensif — en les débloquant sur le plan technique et personnel, en suivant leur progression et en maintenant l'élan quand le travail devient difficile."
+      },
+      "humanServices": {
+        "title": "Services à la personne",
+        "org": "Armée du Salut (gestionnaire de résidence) · Volunteers of America (spécialiste du soutien par les pairs)",
+        "dates": "janv. 2023 – janv. 2026",
+        "desc": "Des années aux côtés de personnes en rétablissement et en crise : soutien par les pairs, désescalade et leadership jusqu'au poste de gestionnaire de résidence. J'ai mis en place des routines quotidiennes et des structures communautaires qui ont aidé des résident·es vulnérables à se sentir en sécurité et à rester stables."
+      }
+    },
+    "proj": {
+      "crypto": {
+        "name": "Tableau de bord d'analyse crypto",
+        "desc": "Un modèle de risque DCA par régression logarithmique qui note le marché de 0 à 1 — transformant des données de prix et de sentiment bruyantes en un signal qu'une personne peut réellement lire avant d'acheter.",
+        "alt": "Capture d'écran du tableau de bord de risque d'analyse crypto"
+      },
+      "grocery": {
+        "name": "Outil d'épicerie tenant compte de l'itinéraire",
+        "desc": "Construit votre liste d'épicerie, puis l'ordonne pour suivre le vrai chemin à travers le magasin — pour faire vos courses en un seul passage, sans revenir sur vos pas.",
+        "alt": "Illustration de l'outil d'épicerie tenant compte de l'itinéraire"
+      },
+      "rocket": {
+        "name": "Rocket Food Delivery (mobile)",
+        "desc": "Une application React Native sur Expo communiquant avec un backend Spring Boot : connexion, navigation dans les restaurants, menus et suivi de commande — ma première pile mobile complète, de bout en bout.",
+        "alt": "Capture d'écran de l'application mobile Rocket Food Delivery"
+      },
+      "portfolio": {
+        "name": "Ce portfolio",
+        "desc": "Le site sur lequel vous êtes — React + Vite, Supabase et GitHub Actions, construit de façon native avec l'IA et spec d'abord. Chaque fonctionnalité a commencé par une spécification écrite avant la moindre ligne de code.",
+        "alt": "Illustration représentant ce site portfolio"
+      }
+    }
+  },
   "pages": {
     "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },
     "portfolio": { "title": "Portfolio", "placeholder": "Contenu du portfolio à venir." },

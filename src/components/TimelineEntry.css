@@ -1,0 +1,39 @@
+.timeline-entry {
+  padding: calc(var(--space) * 2.5) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-entry:last-child {
+  border-bottom: none;
+}
+
+.timeline-entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space);
+}
+
+.timeline-entry__title {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.timeline-entry__dates {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.timeline-entry__org {
+  color: var(--accent-warm);
+  margin: calc(var(--space) * 0.5) 0 0;
+}
+
+.timeline-entry__desc {
+  color: var(--text-muted);
+  margin: var(--space) 0 0;
+  max-width: 68ch;
+}

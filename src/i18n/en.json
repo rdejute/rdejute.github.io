@@ -82,6 +82,58 @@
       }
     }
   },
+  "portfolio": {
+    "heading": "Portfolio",
+    "intro": "Education, experience, and a few things I've built. The résumé below mirrors this page.",
+    "resume": "Download résumé (PDF)",
+    "education": { "heading": "Education" },
+    "work": { "heading": "Experience" },
+    "projects": {
+      "heading": "Projects",
+      "intro": "A mix of client-style builds and things I made because I saw a need."
+    },
+    "edu": {
+      "codeboxx": { "title": "Full-Stack Development Program", "org": "CodeBoxx Academy", "dates": "Mar 2026 – Jul 2026" },
+      "crps": { "title": "Certified Recovery Peer Specialist", "org": "Recovery peer specialist certification", "dates": "2025" },
+      "diploma": { "title": "High School Diploma", "org": "General education", "dates": "2016" }
+    },
+    "jobs": {
+      "coordinator": {
+        "title": "Student Success Coordinator",
+        "org": "CodeBoxx Academy",
+        "dates": "2026 – Present",
+        "desc": "I support students through an intensive full-stack program — unblocking them technically and personally, tracking progress, and keeping momentum going when the work gets hard."
+      },
+      "humanServices": {
+        "title": "Human Services",
+        "org": "Salvation Army (Resident Manager) · Volunteers of America (Peer Support Specialist)",
+        "dates": "Jan 2023 – Jan 2026",
+        "desc": "Years walking alongside people in recovery and crisis: peer support, de-escalation, and leadership up to Resident Manager. I built daily routines and community structures that helped vulnerable residents feel safe and stay stable."
+      }
+    },
+    "proj": {
+      "crypto": {
+        "name": "Crypto Analytics Dashboard",
+        "desc": "A logarithmic-regression DCA risk model that scores the market from 0 to 1 — turning noisy price and sentiment data into a single signal a person can actually read before they buy.",
+        "alt": "Screenshot of the crypto analytics risk dashboard"
+      },
+      "grocery": {
+        "name": "Route-Aware Grocery Tool",
+        "desc": "Builds your grocery list, then sequences it to match the real walking path through the store — so you shop in one pass instead of doubling back.",
+        "alt": "Illustration for the route-aware grocery shopping tool"
+      },
+      "rocket": {
+        "name": "Rocket Food Delivery (Mobile)",
+        "desc": "A React Native app on Expo talking to a Spring Boot backend: sign-in, restaurant browsing, menus, and order navigation — my first full mobile stack, end to end.",
+        "alt": "Screenshot of the Rocket Food Delivery mobile app"
+      },
+      "portfolio": {
+        "name": "This Portfolio",
+        "desc": "The site you're on — React + Vite, Supabase, and GitHub Actions, built AI-native and spec-first. Every feature started as a written spec before a line of code.",
+        "alt": "Illustration representing this portfolio site"
+      }
+    }
+  },
   "pages": {
     "home": { "title": "Home", "placeholder": "Home content coming soon." },
     "portfolio": { "title": "Portfolio", "placeholder": "Portfolio content coming soon." },

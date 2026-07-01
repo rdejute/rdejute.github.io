@@ -1,0 +1,17 @@
+.pf-intro h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 var(--space);
+}
+
+.pf-intro__actions {
+  margin-top: calc(var(--space) * 3);
+}
+
+/* Timeline list sits on the section's surface; entries divide with borders. */
+.pf-timeline {
+  border-top: 1px solid var(--border);
+}
+
+.home-section--alt .pf-timeline {
+  border-top-color: color-mix(in srgb, var(--text) 12%, transparent);
+}
