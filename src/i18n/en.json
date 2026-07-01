@@ -84,7 +84,7 @@
   },
   "portfolio": {
     "heading": "Portfolio",
-    "intro": "Education, experience, and a few things I've built. The résumé below mirrors this page.",
+    "intro": "Education, experience, and a few things I've built.",
     "resume": "Download résumé (PDF)",
     "education": { "heading": "Education" },
     "work": { "heading": "Experience" },
@@ -131,6 +131,38 @@
         "name": "This Portfolio",
         "desc": "The site you're on — React + Vite, Supabase, and GitHub Actions, built AI-native and spec-first. Every feature started as a written spec before a line of code.",
         "alt": "Illustration representing this portfolio site"
+      }
+    }
+  },
+  "links": {
+    "heading": "Links",
+    "intro": "Where to find me, and a couple of places that shaped how I think.",
+    "newTab": "opens in a new tab",
+    "items": {
+      "linkedin": {
+        "title": "LinkedIn",
+        "desc": "Connect with me professionally — my background, roles, and the human-services-to-developer story in full.",
+        "alt": "Raina DeJute on LinkedIn"
+      },
+      "github": {
+        "title": "GitHub",
+        "desc": "Browse the code behind my projects, including this portfolio.",
+        "alt": "Raina DeJute on GitHub"
+      },
+      "youtube": {
+        "title": "YouTube",
+        "desc": "Walkthrough videos for every module — solving LeetCode, explaining my code, and breaking down the concepts that trip people up.",
+        "alt": "Raina DeJute's YouTube channel"
+      },
+      "codeboxx": {
+        "title": "CodeBoxx",
+        "desc": "The full-stack program that shaped this chapter of my career — intensive, project-driven, and where this site was born.",
+        "alt": "CodeBoxx full-stack program"
+      },
+      "cryptoverse": {
+        "title": "Into The Cryptoverse",
+        "desc": "Benjamin Cowen's data-driven crypto analysis — the analytical work that inspired my crypto risk dashboard.",
+        "alt": "Into The Cryptoverse crypto analysis"
       }
     }
   },

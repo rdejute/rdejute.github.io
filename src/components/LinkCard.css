@@ -1,0 +1,87 @@
+.link-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  color: var(--text);
+  text-decoration: none;
+  transition: box-shadow 0.25s ease;
+}
+
+/* Sage glow on hover (box-shadow isn't clipped by overflow: hidden). */
+.link-card:hover {
+  box-shadow: 0 8px 26px -12px var(--accent-cool);
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .link-card {
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+  }
+
+  .link-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Banner: holds an image, or an icon centered on a sage tint. */
+.link-card__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 132px;
+  background: var(--accent-cool-tint);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.link-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.link-card__icon {
+  width: 46px;
+  height: 46px;
+  color: var(--accent-cool-deep);
+}
+
+.link-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 0.75);
+  padding: calc(var(--space) * 2.5);
+}
+
+.link-card__titlerow {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.75);
+}
+
+.link-card__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.link-card__external {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.link-card:hover .link-card__external {
+  color: var(--accent-cool);
+}
+
+.link-card__desc {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
