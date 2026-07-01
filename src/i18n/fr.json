@@ -134,6 +134,38 @@
       }
     }
   },
+  "links": {
+    "heading": "Liens",
+    "intro": "Où me trouver, et quelques endroits qui ont façonné ma façon de penser.",
+    "newTab": "ouvre dans un nouvel onglet",
+    "items": {
+      "linkedin": {
+        "title": "LinkedIn",
+        "desc": "Connectez-vous avec moi sur le plan professionnel — mon parcours, mes rôles et l'histoire complète des services à la personne au développement.",
+        "alt": "Raina DeJute sur LinkedIn"
+      },
+      "github": {
+        "title": "GitHub",
+        "desc": "Parcourez le code derrière mes projets, y compris ce portfolio.",
+        "alt": "Raina DeJute sur GitHub"
+      },
+      "youtube": {
+        "title": "YouTube",
+        "desc": "Des vidéos explicatives pour chaque module — résolution de LeetCode, explication de mon code et décryptage des concepts qui posent problème.",
+        "alt": "La chaîne YouTube de Raina DeJute"
+      },
+      "codeboxx": {
+        "title": "CodeBoxx",
+        "desc": "Le programme full-stack qui a façonné ce chapitre de ma carrière — intensif, axé sur les projets, et là où ce site est né.",
+        "alt": "Programme full-stack CodeBoxx"
+      },
+      "cryptoverse": {
+        "title": "Into The Cryptoverse",
+        "desc": "L'analyse crypto fondée sur les données de Benjamin Cowen — le travail analytique qui a inspiré mon tableau de bord de risque crypto.",
+        "alt": "Analyse crypto Into The Cryptoverse"
+      }
+    }
+  },
   "pages": {
     "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },
     "portfolio": { "title": "Portfolio", "placeholder": "Contenu du portfolio à venir." },
