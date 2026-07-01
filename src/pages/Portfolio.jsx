@@ -15,15 +15,15 @@ export default function Portfolio() {
     <>
       <section className="home-section pf-intro" aria-labelledby="pf-heading">
         <Reveal>
-          <h1 id="pf-heading">{t('portfolio.heading')}</h1>
-          <p className="home-section__intro">{t('portfolio.intro')}</p>
-          <div className="pf-intro__actions">
+          <div className="pf-intro__top">
+            <h1 id="pf-heading">{t('portfolio.heading')}</h1>
             <ResumeDownload />
           </div>
+          <p className="home-section__intro">{t('portfolio.intro')}</p>
         </Reveal>
       </section>
 
-      <section className="home-section" aria-labelledby="edu-heading">
+      <section className="home-section home-section--alt" aria-labelledby="edu-heading">
         <Reveal as="header" className="home-section__head">
           <h2 id="edu-heading">{t('portfolio.education.heading')}</h2>
         </Reveal>
