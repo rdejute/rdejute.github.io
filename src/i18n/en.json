@@ -185,6 +185,20 @@
       "error": "Something went wrong. Please try again."
     }
   },
+  "login": {
+    "heading": "Admin login",
+    "email": { "label": "Email", "placeholder": "admin@example.com" },
+    "password": { "label": "Password", "placeholder": "Your password" },
+    "submit": "Log in",
+    "submitting": "Logging in…",
+    "error": "Invalid login credentials."
+  },
+  "backoffice": {
+    "heading": "Back Office",
+    "placeholder": "You're signed in. The message dashboard arrives in the next feature.",
+    "signedInAs": "Signed in as",
+    "logout": "Log out"
+  },
   "pages": {
     "home": { "title": "Home", "placeholder": "Home content coming soon." },
     "portfolio": { "title": "Portfolio", "placeholder": "Portfolio content coming soon." },
