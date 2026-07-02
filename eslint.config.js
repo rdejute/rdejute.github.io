@@ -5,7 +5,8 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // Edge Functions run on Deno (their own globals/runtime), not the Vite app.
+  globalIgnores(['dist', 'supabase/functions']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

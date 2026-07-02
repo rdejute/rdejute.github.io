@@ -166,6 +166,25 @@
       }
     }
   },
+  "contact": {
+    "heading": "Me contacter",
+    "intro": "Un poste, un projet, ou juste envie de dire bonjour ? Envoyez-moi un message — il arrive directement dans ma boîte de réception.",
+    "name": { "label": "Nom", "placeholder": "Votre nom" },
+    "email": { "label": "Courriel", "placeholder": "vous@exemple.com" },
+    "message": { "label": "Message", "placeholder": "Qu'avez-vous en tête ?" },
+    "submit": "Envoyer le message",
+    "sending": "Envoi…",
+    "unavailable": "Le formulaire de contact est temporairement indisponible. Écrivez-moi directement par courriel.",
+    "errors": {
+      "name": "Veuillez saisir votre nom.",
+      "email": "Veuillez saisir une adresse courriel valide.",
+      "message": "Veuillez saisir un message."
+    },
+    "feedback": {
+      "success": "Message envoyé ! Merci — je vous répondrai bientôt.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    }
+  },
   "pages": {
     "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },
     "portfolio": { "title": "Portfolio", "placeholder": "Contenu du portfolio à venir." },
