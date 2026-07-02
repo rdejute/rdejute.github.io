@@ -166,6 +166,25 @@
       }
     }
   },
+  "contact": {
+    "heading": "Get in touch",
+    "intro": "Have a role, a project, or just want to say hello? Send a message — it lands straight in my inbox.",
+    "name": { "label": "Name", "placeholder": "Your name" },
+    "email": { "label": "Email", "placeholder": "you@example.com" },
+    "message": { "label": "Message", "placeholder": "What's on your mind?" },
+    "submit": "Send message",
+    "sending": "Sending…",
+    "unavailable": "The contact form is temporarily unavailable. Please email me directly.",
+    "errors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "message": "Please enter a message."
+    },
+    "feedback": {
+      "success": "Message sent! Thanks — I'll get back to you soon.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
   "pages": {
     "home": { "title": "Home", "placeholder": "Home content coming soon." },
     "portfolio": { "title": "Portfolio", "placeholder": "Portfolio content coming soon." },

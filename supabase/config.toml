@@ -15,3 +15,9 @@ entrypoint = "./functions/messages/index.js"
 
 [functions.public-ping]
 verify_jwt = false
+
+# Triggered by a Database Webhook (no user JWT); it verifies its own shared
+# secret header instead, so JWT verification is off.
+[functions.notify-contact]
+verify_jwt = false
+entrypoint = "./functions/notify-contact/index.js"
