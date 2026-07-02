@@ -18,7 +18,8 @@
     "contactHeading": "Me contacter",
     "emailLabel": "Écrire à Raina",
     "social": "Me retrouver en ligne",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "hint": "Un indice ?"
   },
   "home": {
     "eyebrow": "Le front-end d'abord · Guidée par l'empathie",
@@ -184,6 +185,20 @@
       "success": "Message envoyé ! Merci — je vous répondrai bientôt.",
       "error": "Une erreur s'est produite. Veuillez réessayer."
     }
+  },
+  "login": {
+    "heading": "Connexion admin",
+    "email": { "label": "Courriel", "placeholder": "admin@example.com" },
+    "password": { "label": "Mot de passe", "placeholder": "Votre mot de passe" },
+    "submit": "Se connecter",
+    "submitting": "Connexion…",
+    "error": "Identifiants invalides."
+  },
+  "backoffice": {
+    "heading": "Back-office",
+    "placeholder": "Vous êtes connecté. Le tableau de bord des messages arrive dans la prochaine fonctionnalité.",
+    "signedInAs": "Connecté en tant que",
+    "logout": "Se déconnecter"
   },
   "pages": {
     "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },

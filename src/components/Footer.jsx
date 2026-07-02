@@ -52,6 +52,11 @@ export default function Footer() {
         <p className="site-footer__copy">
           © {year} Raina DeJute. {t('footer.rights')}
         </p>
+
+        {/* Easter-egg hint: "Gradius" is where the Konami code debuted. */}
+        <p className="site-footer__hint">
+          {t('footer.hint')} <span className="site-footer__hint-word">Gradius</span>
+        </p>
       </div>
     </footer>
   )

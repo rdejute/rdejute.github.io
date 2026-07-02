@@ -61,6 +61,20 @@
   margin: 0;
 }
 
+/* Subtle Konami-code hint. */
+.site-footer__hint {
+  margin: calc(var(--space) * 1.5) 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.site-footer__hint-word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent-warm);
+}
+
 @media (max-width: 768px) {
   .site-footer__inner {
     padding: calc(var(--space) * 3) calc(var(--space) * 2);

@@ -106,13 +106,14 @@
   }
 }
 
-/* Clips the photo to the oval (kept on a separate layer from the glow frame,
-   which can't use overflow:hidden without clipping its glow). */
+/* Clips the photo to the oval, with a feathered edge so the rim fades softly
+   into the background (no harsh line) — pairs with the sage glow behind it. */
 .hero__portrait-clip {
-  aspect-ratio: 44 / 54; /* same proportions as before — oval unchanged */
+  aspect-ratio: 44 / 54;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid var(--border);
+  -webkit-mask: radial-gradient(closest-side, #000 90%, transparent 100%);
+  mask: radial-gradient(closest-side, #000 92%, transparent 100%);
 }
 
 .hero__portrait {
