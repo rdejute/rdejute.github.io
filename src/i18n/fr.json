@@ -18,7 +18,8 @@
     "contactHeading": "Me contacter",
     "emailLabel": "Écrire à Raina",
     "social": "Me retrouver en ligne",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "hint": "Un indice ?"
   },
   "home": {
     "eyebrow": "Le front-end d'abord · Guidée par l'empathie",

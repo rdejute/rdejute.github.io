@@ -18,7 +18,8 @@
     "contactHeading": "Get in touch",
     "emailLabel": "Email Raina",
     "social": "Find me online",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "hint": "Need a hint?"
   },
   "home": {
     "eyebrow": "Front-end first · Empathy-led",
