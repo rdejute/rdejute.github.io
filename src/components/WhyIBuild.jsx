@@ -1,4 +1,4 @@
-import connectionGraphic from '../assets/connection-graphic.png'
+import connectionGraphic from '../assets/connection-graphic.jpg'
 import Reveal from './Reveal'
 import ProgressiveImage from './ProgressiveImage'
 import { useScrollFill } from '../hooks/useScrollFill'

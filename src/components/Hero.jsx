@@ -1,4 +1,4 @@
-import portrait from '../assets/headshot.png'
+import portrait from '../assets/headshot.jpg'
 import { useLanguage } from '../context/LanguageContext'
 import './Hero.css'
 

@@ -1,4 +1,4 @@
-import contactImage from '../assets/contact-image.png'
+import contactImage from '../assets/contact-image.jpg'
 import ContactForm from '../components/ContactForm'
 import ProgressiveImage from '../components/ProgressiveImage'
 import Reveal from '../components/Reveal'

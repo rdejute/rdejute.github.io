@@ -1,8 +1,8 @@
-import linkedinImg from '../assets/links/linkedin.png'
-import githubImg from '../assets/links/github.png'
-import youtubeImg from '../assets/links/youtube.png'
-import cryptoImg from '../assets/links/crypto.png'
-import codeboxxImg from '../assets/links/codeboxx.png'
+import linkedinImg from '../assets/links/linkedin.jpg'
+import githubImg from '../assets/links/github.jpg'
+import youtubeImg from '../assets/links/youtube.jpg'
+import cryptoImg from '../assets/links/crypto.jpg'
+import codeboxxImg from '../assets/links/codeboxx.jpg'
 
 // Curated links — profiles plus a couple of "sites I value". A card shows an
 // `image` banner when provided, otherwise the `icon` (a symbol id in
