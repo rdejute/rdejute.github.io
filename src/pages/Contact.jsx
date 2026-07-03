@@ -12,19 +12,21 @@ export default function Contact() {
   const { t } = useLanguage()
   return (
     <section className="home-section" aria-labelledby="contact-heading">
-      <Reveal as="header" className="home-section__head">
-        <h1 id="contact-heading">{t('contact.heading')}</h1>
-        <p className="home-section__intro">{t('contact.intro')}</p>
-        <p className="contact-badge">
-          <span className="contact-badge__dot" aria-hidden="true" />
-          {t('contact.replyBadge')}
-        </p>
-      </Reveal>
-
       <div className="contact-layout">
-        <Reveal className="contact-layout__form">
-          <ContactForm />
-        </Reveal>
+        <div className="contact-layout__main">
+          <Reveal as="header" className="home-section__head">
+            <h1 id="contact-heading">{t('contact.heading')}</h1>
+            <p className="home-section__intro">{t('contact.intro')}</p>
+            <p className="contact-badge">
+              <span className="contact-badge__dot" aria-hidden="true" />
+              {t('contact.replyBadge')}
+            </p>
+          </Reveal>
+
+          <Reveal className="contact-layout__form">
+            <ContactForm />
+          </Reveal>
+        </div>
 
         <Reveal className="contact-layout__media">
           <div className="contact-media glow">
