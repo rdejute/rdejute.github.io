@@ -8,7 +8,9 @@ import { flushSync } from 'react-dom'
 const ThemeContext = createContext(null)
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light')
+  // Dark (espresso) is the default look; index.html also sets data-theme="dark"
+  // on <html> so the very first paint is dark with no flash of the light theme.
+  const [theme, setTheme] = useState('dark')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)

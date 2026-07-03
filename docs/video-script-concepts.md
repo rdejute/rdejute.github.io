@@ -113,7 +113,7 @@ your data. That reframed the whole project for me.
 
 ## Concept 3 — One attribute re-skins the whole site, and the switch is animated
 
-[screen: the site in light mode]
+[screen: the site in dark mode — the default]
 
 Third one is the theme system, and it has two layers — one architectural, one that's just a fun,
 genuinely tricky piece of browser API.
@@ -122,27 +122,27 @@ The architecture: every single color in this app is a **CSS variable** — I cal
 in `tokens.css`. [screen: open `src/styles/tokens.css`] At line 5 there's the light theme under
 `:root`, and at line 56 the exact same variable names again under `data-theme dark`. My components
 never write a hex code; they say things like `var(--bg)`. So when I flip one attribute — `data-theme`
-on the html element — every color on the site changes at once. That's it. That flip happens at line 13
+on the html element — every color on the site changes at once. That's it. That flip happens at line 15
 of `ThemeContext.jsx`.
 
-[screen: click the theme toggle — the espresso theme wipes across the screen in a circle from the
-button]
+[screen: click the theme toggle — the light palette wipes across the screen in a circle from the
+button; toggle again and the espresso wipes back]
 
 Now the part I'm proud of. I didn't want the theme to just snap. I wanted the new palette to wash
 across the screen from the button I clicked. That uses the browser's **View Transitions API**, and it
-fought me. Here's why. [screen: `src/context/ThemeContext.jsx`, around line 34] You call
+fought me. Here's why. [screen: `src/context/ThemeContext.jsx`, around line 36] You call
 `document.startViewTransition`, and you hand it a function that changes the page. The browser takes a
 snapshot *before* your function runs and *after*, and animates between them. The problem: React
 updates state asynchronously. So when the browser went to take its "after" picture, React hadn't
 actually changed anything yet — and the animation did nothing.
 
-The fix is line 34 to 36: I wrap my theme change in **`flushSync`**. That forces React to apply the
+The fix is line 36 to 38: I wrap my theme change in **`flushSync`**. That forces React to apply the
 update *synchronously*, right there inside the callback, so by the time the browser snapshots "after,"
-the new theme is really on the page. Then at line 38 I animate the new snapshot's `clip-path` — a
+the new theme is really on the page. Then at line 40 I animate the new snapshot's `clip-path` — a
 circle growing from the exact x-y coordinates of my click out to the far corner of the screen. That's
 the wipe.
 
-And it's polite: at line 21, if the browser doesn't support the API, or if you've told your system you
+And it's polite: at line 23, if the browser doesn't support the API, or if you've told your system you
 prefer reduced motion, it skips all of that and just swaps instantly.
 
 **What I learned:** two things. Centralizing your design into tokens means you can restyle an entire

@@ -114,9 +114,11 @@ themes stay consistent. The animated wipe is the "every interaction feels intent
 **Where it lives.**
 - The token contract, both themes: `src/styles/tokens.css:5` (`:root` light), `:6` (`--bg`),
   `:56` (`[data-theme="dark"]`).
-- Applying the theme by attribute: `src/context/ThemeContext.jsx:13-15`.
-- The toggle: reduced-motion / unsupported fallback `src/context/ThemeContext.jsx:19-24`; the radial
-  wipe with `startViewTransition` + `flushSync` `:34-36`; animating the clip-path `:38-43`.
+- Default theme (dark): `src/context/ThemeContext.jsx:13` (plus `data-theme="dark"` on `<html>` in
+  `index.html` so the first paint is dark with no flash).
+- Applying the theme by attribute: `src/context/ThemeContext.jsx:15-17`.
+- The toggle: reduced-motion / unsupported fallback `src/context/ThemeContext.jsx:23-26`; the radial
+  wipe with `startViewTransition` + `flushSync` `:36-38`; animating the clip-path `:40-45`.
 - The pseudo-element rules that make the wipe read as a clean overlay:
   `src/styles/motion.css` (the `::view-transition-old/new(root)` block).
 
@@ -128,7 +130,7 @@ themes stay consistent. The animated wipe is the "every interaction feels intent
   breath: "React normally batches state updates and applies them asynchronously; `startViewTransition`
   needs the DOM already changed inside its callback so it can capture the 'after' snapshot, so
   `flushSync` forces React to apply the theme change right then." If that sentence doesn't feel
-  natural yet, rehearse it — a coach may ask. (`src/context/ThemeContext.jsx:34-36`)
+  natural yet, rehearse it — a coach may ask. (`src/context/ThemeContext.jsx:36-38`)
 - **Why the guard needs a "loading" state (Concept 1/2).** Practice: "the session starts unknown
   because I have to ask Supabase asynchronously; without a loading state the Back Office would flash
   the login screen for a frame before the session resolves." (`src/App.jsx:72-73`,
@@ -136,6 +138,6 @@ themes stay consistent. The animated wipe is the "every interaction feels intent
 - **RLS vs the client guard (Concept 2).** Be ready to say plainly: "hiding the page is just UX; the
   real security is the Postgres policy — the anon key literally cannot read the inbox." Know the
   difference between `to anon` and `to authenticated`. (`supabase/schema.sql:16-31`)
-- **Known gaps to NOT overclaim (see the technical-demo notes):** the theme currently defaults to light
-  and is **not** persisted or read from the OS setting; the language is **not** persisted across
-  reloads. Say what's true.
+- **Known gaps to NOT overclaim (see the technical-demo notes):** the theme now defaults to **dark**
+  (`index.html` + `ThemeContext.jsx:13`) but is still **not** persisted or read from the OS setting; the
+  language is **not** persisted across reloads. Say what's true.

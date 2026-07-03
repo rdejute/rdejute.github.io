@@ -352,18 +352,19 @@ region.**
 - **CODE:** [screen: `src/styles/tokens.css`] Here's the engine. The light theme is defined at line 5, the
   dark theme at line 56 — the exact same variable names, different values. My components never write a
   raw color; they reference these tokens. So flipping one attribute, `data-theme` on the html element,
-  re-skins the entire site. [screen: `src/context/ThemeContext.jsx` line 13] That flip happens here. And
-  lines 34 to 43 are the animation — it uses the browser's View Transitions API to grow a circle of the
-  new theme out from exactly where I clicked. The tricky part is line 34's `flushSync`: React normally
+  re-skins the entire site. [screen: `src/context/ThemeContext.jsx` line 15] That flip happens here. And
+  lines 36 to 45 are the animation — it uses the browser's View Transitions API to grow a circle of the
+  new theme out from exactly where I clicked. The tricky part is line 37's `flushSync`: React normally
   applies state changes asynchronously, but the View Transitions API needs the DOM already updated inside
   its callback so it can capture the "after" snapshot, so `flushSync` forces the theme change to happen
-  synchronously right then. And line 21 is the graceful fallback — if the browser doesn't support the API,
+  synchronously right then. And line 23 is the graceful fallback — if the browser doesn't support the API,
   or you prefer reduced motion, it just swaps instantly with no animation.
-- **⚠️ Honest callout:** right now the theme **defaults to light, it does not read your operating-system
-  preference, and it does not persist across reloads.** [screen: `ThemeContext.jsx` line 11] The starting
-  theme is hard-coded to light here. The spec mentions an OS default and saving your choice — that part
-  isn't built yet, so I'm not going to claim it. The toggle fully works; remembering the choice is on my
-  to-do list.
+- **⚠️ Honest callout:** the theme **defaults to dark — that's the look I want — but it still does not read
+  your operating-system preference, and it does not persist a change across reloads.** [screen:
+  `ThemeContext.jsx` line 13] The default is set to dark here, and `index.html` sets `data-theme="dark"`
+  too so the very first paint is dark with no flash. What's *not* built is reading your OS setting or
+  saving a switch you make — so if you toggle to light and reload, it comes back dark. The toggle fully
+  works; remembering your choice is on my to-do list.
 
 ---
 
@@ -396,8 +397,8 @@ region.**
 
 - **Auth enabled, the admin user, and "the public cannot read messages"** — those are verified in the
   Supabase dashboard, and the RLS policies in `schema.sql` are the proof.
-- **Theme** — it works and it animates, but it does **not** yet default from the OS or persist.
-  (`ThemeContext.jsx:11`)
+- **Theme** — it works, it animates, and it defaults to dark, but it does **not** read your OS preference
+  or persist a change across reloads. (`ThemeContext.jsx:13`)
 - **Language** — it switches live, but does **not** yet persist across reloads. (`LanguageContext.jsx:11`)
 - **AI-tool documentation** — `docs/Research.md` names the tool for most images, but a few Links banners
   and project graphics still say "confirm," and the comments in `Hero.jsx` and `Logo.jsx` still have a
