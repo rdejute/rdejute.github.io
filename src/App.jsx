@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import BackOffice from './pages/BackOffice'
 import CursorGlow from './components/CursorGlow'
 import Preloader from './components/Preloader'
+import { playKonamiTune, stopKonamiTune } from './lib/konamiAudio'
 
 // Public views switch by app state so the URL stays at root (ai-spec §3.1).
 // Secret views are reached only via the hash (#login/#backoffice) or the Konami
@@ -65,12 +66,22 @@ function AppRoutes() {
     window.scrollTo(0, 0)
   }, [view])
 
-  // Konami code opens the login view from anywhere.
-  useKonamiCode(useCallback(() => navigate('login'), [navigate]))
+  // Konami code opens the login view from anywhere — and cues the Contra title
+  // theme. The final keypress is a user gesture, so this playback is allowed.
+  useKonamiCode(useCallback(() => {
+    playKonamiTune()
+    navigate('login')
+  }, [navigate]))
 
   // Guard the Back Office: no session → login (once the session check resolves).
   let guardedView = view
   if (view === 'backoffice' && !session) guardedView = loading ? 'loading' : 'login'
+
+  // The easter-egg tune belongs only on the login view; stop it anywhere else
+  // (navigating away, or logging into the Back Office).
+  useEffect(() => {
+    if (guardedView !== 'login') stopKonamiTune()
+  }, [guardedView])
 
   const Page = PAGES[guardedView] ?? Home
 
