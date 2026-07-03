@@ -135,8 +135,8 @@ button {
 /* Solid fill reserved for the primary action; deep sage keeps text readable
    in both themes (deep sage + surface flip oppositely). */
 .btn--primary {
-  background: var(--accent-cool-deep);
-  color: var(--surface);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
   box-shadow: var(--shadow-sm);
 }
 
@@ -147,7 +147,7 @@ button {
 }
 
 .btn--primary:hover {
-  background: var(--accent-cool);
+  background: var(--btn-primary-bg-hover);
   box-shadow: var(--shadow-focal);
   text-decoration: none;
 }
@@ -159,8 +159,8 @@ button {
 }
 
 .btn--ghost:hover {
-  background: var(--accent-cool-tint);
-  border-color: var(--accent-cool);
+  background: var(--earth-tint);
+  border-color: var(--focal-accent);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
 }

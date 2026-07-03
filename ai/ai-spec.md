@@ -171,32 +171,41 @@ before building.** If a coach prefers literal HashRouter, only this section chan
 The palette is warm and earthy with a **two-accent system**, where **sage** is the cool, focal accent
 for interactive elements (buttons, links, active nav, focus rings, the status dot) and a **warm
 accent** carries typographic moments (eyebrow text, italic taglines). The warm accent shifts per
-theme: a soft **amber/orange** on the espresso dark theme, a **terracotta** on the warm light theme —
+theme: a soft **amber/orange** on the espresso dark theme, a **burnt orange** on the light theme —
 same warm family, tuned for contrast on each background. **The light theme uses no white or
-off-white**: it layers warm browns (oat `--surface`, tan `--bg`, clay `--surface-alt`) for depth, with
-sage and terracotta as the only non-brown colors. In light mode sage is the clear focal lead against
-warm neutrals; in dark mode it reads as the cool counterpoint to the amber. Keep sage genuinely muted;
-never let it drift toward a saturated green. Accents live mostly in outlines, small details, and
-`:hover` states; solid fills are reserved for primary actions and hover.
+off-white**: it is built on **light sage** (`--bg`/`--surface`/`--surface-alt`) for a calm, colored
+base, with **brown, gold, and burnt-orange** as the warm accents that carry the pop. Interactive
+elements use a **deeper sage** so they read as the focal lead against the lighter sage base; in dark
+mode sage reads as the cool counterpoint to the amber. Keep sage genuinely muted; never let it drift
+toward a saturated green. Accents live mostly in outlines, small details, and `:hover` states; solid
+fills are reserved for primary actions and hover.
 
 These values are the contract. Define them in `tokens.css` for **both** themes and reference them
 everywhere.
 
 ```css
-:root {                      /* LIGHT theme (warm — NO white): oat + clay browns, sage FOCAL */
-  --bg:            #E6D8BF;   /* warm tan base */
-  --surface:       #EFE3CC;   /* lighter oat — header, footer, raised surfaces (never white) */
-  --surface-alt:   #DBC9A6;   /* deeper clay-tan — bands / hero strips */
-  --text:          #2E2015;
-  --text-muted:    #7A6A50;   /* warm brown */
-  --border:        rgba(46, 32, 21, 0.14);
+:root {                      /* LIGHT theme (NO white): warm earthy SAGE base + brown/beige/orange accents */
+  --bg:            #CAC6A0;   /* dusty, warm sage (olive-leaning, muted — not mint) */
+  --surface:       #D9D5B2;   /* lighter dusty sage — header, footer, raised surfaces */
+  --surface-alt:   #B8B389;   /* deeper dusty olive-sage — bands / hero strips */
+  --text:          #2A1F11;
+  --text-muted:    #665936;   /* warm brown */
+  --border:        rgba(42, 31, 17, 0.18);
 
-  --accent-warm:        #C26A38;   /* terracotta orange — typographic accent */
-  --accent-warm-soft:   #D08C5A;
-  --accent-cool:        #5F7E59;   /* sage — FOCAL: buttons, active nav, focus, icons */
-  --accent-cool-soft:   #88A580;
-  --accent-cool-deep:   #3E5439;   /* sage text/links on tan or on a sage tint (readable) */
-  --accent-cool-tint:   rgba(95, 126, 89, 0.18);
+  --accent-warm:        #BE571F;   /* burnt orange — typographic accent */
+  --accent-warm-soft:   #D8983B;   /* gold */
+  --accent-cool:        #5E6C3A;   /* warm olive-sage — active nav, focus, icons */
+  --accent-cool-soft:   #899467;
+  --accent-cool-deep:   #414B27;   /* deep olive-sage text/links (readable on the sage base) */
+  --accent-cool-tint:   rgba(94, 108, 58, 0.22);
+
+  /* Earthy interactive layer (so light isn't monochrome green): brown buttons,
+     terracotta hover glow, beige hover wash. Dark keeps sage for all of these. */
+  --focal-accent:          #B0632C;                  /* warm ochre-brown — hover glows / borders */
+  --earth-tint:            rgba(120, 82, 45, 0.16);  /* beige-brown hover wash */
+  --btn-primary-bg:        #6E4A2C;                  /* earthy brown */
+  --btn-primary-bg-hover:  #855D39;
+  --btn-primary-fg:        #EFE8D6;                  /* warm cream (foreground only) */
 
   --font-display: "Space Grotesk", system-ui, sans-serif;  /* headings / name */
   --font-serif:   "Newsreader", Georgia, serif;            /* italic taglines, pull quotes */

@@ -18,7 +18,7 @@
 /* Warm lift + sage bloom on hover (box-shadow isn't clipped by overflow). */
 .link-card:hover {
   box-shadow: var(--shadow-focal);
-  border-color: color-mix(in srgb, var(--accent-cool) 40%, var(--border));
+  border-color: color-mix(in srgb, var(--focal-accent) 40%, var(--border));
   text-decoration: none;
 }
 
@@ -32,7 +32,7 @@
   border-radius: inherit;
   background: radial-gradient(
     18rem 18rem at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--accent-cool) 20%, transparent),
+    color-mix(in srgb, var(--focal-accent) 22%, transparent),
     transparent 55%
   );
   opacity: 0;

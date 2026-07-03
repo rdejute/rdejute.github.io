@@ -14,7 +14,7 @@
 
 .project-card:hover {
   box-shadow: var(--shadow-focal);
-  border-color: color-mix(in srgb, var(--accent-cool) 40%, var(--border));
+  border-color: color-mix(in srgb, var(--focal-accent) 40%, var(--border));
 }
 
 @media (prefers-reduced-motion: no-preference) {

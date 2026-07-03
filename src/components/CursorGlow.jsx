@@ -27,9 +27,10 @@ export default function CursorGlow() {
     let ty = y
 
     const render = () => {
-      // Ease toward the target so the glow lags a touch — feels alive, not stuck.
-      x += (tx - x) * 0.18
-      y += (ty - y) * 0.18
+      // Ease toward the target — a small amount of lag keeps it alive without
+      // the distracting "trailing ball" of a loose follow.
+      x += (tx - x) * 0.42
+      y += (ty - y) * 0.42
       if (dot) dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
       raf = requestAnimationFrame(render)
     }

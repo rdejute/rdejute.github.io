@@ -2,24 +2,35 @@
    the form on desktop, and stacks below it on mobile. */
 .contact-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
-  gap: calc(var(--space) * 5);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: calc(var(--space) * 4);
+  align-items: stretch; /* image matches the form's height */
   margin-top: calc(var(--space) * 3);
 }
 
+.contact-layout__media {
+  align-self: stretch;
+}
+
+/* The image is absolutely filled so it never dictates the row height — it
+   simply covers whatever height the form sets, staying inline with it. */
 .contact-media {
-  position: sticky;
-  top: calc(var(--space) * 4);
+  position: relative;
+  height: 100%;
+  min-height: 340px;
   border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
 }
 
 .contact-media__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (max-width: 860px) {
@@ -28,9 +39,13 @@
     gap: calc(var(--space) * 4);
   }
 
-  .contact-media {
-    position: static;
+  .contact-layout__media {
     order: 2;
+  }
+
+  .contact-media {
+    height: auto;
+    aspect-ratio: 4 / 5;
     max-width: 420px;
     margin: 0 auto;
   }

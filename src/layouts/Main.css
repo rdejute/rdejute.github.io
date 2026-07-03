@@ -27,6 +27,16 @@
   opacity: 0.5;
 }
 
+/* Dark mode: drop the left sage halo (distracting on espresso) but keep the
+   warm bloom that tracks scroll on the right. */
+[data-theme="dark"] .ambient-light {
+  background: radial-gradient(
+    42rem 42rem at 78% calc(-10% + var(--page-scroll, 0) * 120%),
+    color-mix(in srgb, var(--accent-warm) 22%, transparent),
+    transparent 60%
+  );
+}
+
 /* Content sits above the ambient layer. The header (sticky) and bottom nav keep
    their own higher z-index; only the in-flow main + footer need lifting off 0. */
 .layout > .layout__main,

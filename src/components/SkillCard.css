@@ -16,7 +16,7 @@
 /* Warm ambient lift + sage bloom, and the hairline border warms to sage. */
 .skill-card:hover {
   box-shadow: var(--shadow-focal);
-  border-color: color-mix(in srgb, var(--accent-cool) 40%, var(--border));
+  border-color: color-mix(in srgb, var(--focal-accent) 40%, var(--border));
 }
 
 /* Gentle spring lift — motion, so only when motion is welcome. */
