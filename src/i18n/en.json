@@ -13,6 +13,10 @@
     "theme": "Toggle light and dark theme",
     "language": "Switch language"
   },
+  "field": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
   "footer": {
     "tagline": "Empathy is my framework.",
     "contactHeading": "Get in touch",
@@ -170,6 +174,8 @@
   "contact": {
     "heading": "Get in touch",
     "intro": "Have a role, a project, or just want to say hello? Send a message — it lands straight in my inbox.",
+    "replyBadge": "Usually replies within a day",
+    "imageAlt": "Abstract illustration of a letter at the center of a warm, connected world",
     "name": { "label": "Name", "placeholder": "Your name" },
     "email": { "label": "Email", "placeholder": "you@example.com" },
     "message": { "label": "Message", "placeholder": "What's on your mind?" },
@@ -196,9 +202,22 @@
   },
   "backoffice": {
     "heading": "Back Office",
-    "placeholder": "You're signed in. The message dashboard arrives in the next feature.",
     "signedInAs": "Signed in as",
-    "logout": "Log out"
+    "logout": "Log out",
+    "loading": "Loading messages…",
+    "error": "Couldn't load messages. Please try again.",
+    "empty": "No messages yet.",
+    "view": "View",
+    "delete": "Delete",
+    "cols": {
+      "name": "Name",
+      "email": "Email",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "modal": {
+      "close": "Close"
+    }
   },
   "pages": {
     "home": { "title": "Home", "placeholder": "Home content coming soon." },

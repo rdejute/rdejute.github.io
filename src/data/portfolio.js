@@ -1,7 +1,7 @@
-import cryptoImg from '../assets/crypto-risk-desk.png'
-import groceryImg from '../assets/grocery-graphic.png'
-import rocketImg from '../assets/rdelivery.png'
-import portfolioImg from '../assets/portfolio-graphic.png'
+import cryptoImg from '../assets/crypto-risk-desk.jpg'
+import groceryImg from '../assets/grocery-graphic.jpg'
+import rocketImg from '../assets/rdelivery.jpg'
+import portfolioImg from '../assets/portfolio-graphic.jpg'
 
 // Education & work — ordered newest-first (reverse chronological) at the source.
 export const EDUCATION = [

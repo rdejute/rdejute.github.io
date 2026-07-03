@@ -1,10 +1,20 @@
 import { useLanguage } from '../context/LanguageContext'
+import ProgressiveImage from './ProgressiveImage'
 import './LinkCard.css'
 
 // One curated link — a full-card anchor opening in a new tab. The media tile is
-// an icon/logo by default, or an <img> when `image` is provided.
+// an icon/logo by default, or an <img> when `image` is provided. A soft sage
+// sheen pools toward the cursor (--mx/--my) while hovered.
 export default function LinkCard({ titleKey, descKey, url, icon, image, imageAltKey }) {
   const { t } = useLanguage()
+
+  const onMove = (e) => {
+    const el = e.currentTarget
+    const r = el.getBoundingClientRect()
+    el.style.setProperty('--mx', `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`)
+    el.style.setProperty('--my', `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`)
+  }
+
   return (
     <a
       className="link-card glow"
@@ -12,10 +22,11 @@ export default function LinkCard({ titleKey, descKey, url, icon, image, imageAlt
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${t(titleKey)} — ${t('links.newTab')}`}
+      onMouseMove={onMove}
     >
       <span className="link-card__media">
         {image ? (
-          <img className="link-card__img" src={image} alt={t(imageAltKey)} loading="lazy" />
+          <ProgressiveImage className="link-card__img" src={image} alt={t(imageAltKey)} />
         ) : (
           <svg className="link-card__icon" aria-hidden="true">
             <use href={`/icons.svg#${icon}`} />

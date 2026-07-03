@@ -1,18 +1,21 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useLanguage } from '../context/LanguageContext'
 import FormField from '../components/FormField'
 import './Login.css'
 
 // Secret admin login (reached via #login or the Konami code). On success the
-// session is set and we navigate to the Back Office.
+// session is set and we navigate to the Back Office. A failed attempt gives a
+// gentle shake — even the error state stays kind.
 export default function Login({ onNavigate }) {
   const { t } = useLanguage()
   const { signIn } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const [shaking, setShaking] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const shakeTimer = useRef(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -20,13 +23,19 @@ export default function Login({ onNavigate }) {
     setError(false)
     const { error: authError } = await signIn(email, password)
     setSubmitting(false)
-    if (authError) setError(true)
-    else onNavigate('backoffice')
+    if (authError) {
+      setError(true)
+      setShaking(true)
+      clearTimeout(shakeTimer.current)
+      shakeTimer.current = setTimeout(() => setShaking(false), 500)
+    } else {
+      onNavigate('backoffice')
+    }
   }
 
   return (
     <section className="home-section login" aria-labelledby="login-heading">
-      <div className="login__card">
+      <div className={`login__card${shaking ? ' shake' : ''}`}>
         <h1 id="login-heading" className="login__title">
           {t('login.heading')}
         </h1>
@@ -48,6 +57,7 @@ export default function Login({ onNavigate }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
+            revealable
           />
 
           <div aria-live="polite">

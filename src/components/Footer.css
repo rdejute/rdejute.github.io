@@ -48,11 +48,24 @@
   align-items: center;
   gap: calc(var(--space) * 0.75);
   color: var(--text);
+  background-image: none;               /* opt out of the inline-link underline */
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.site-footer__social:hover {
+  color: var(--accent-cool-deep);
 }
 
 .site-footer__icon {
   width: 20px;
   height: 20px;
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-footer__social:hover .site-footer__icon {
+    transform: translateY(-2px);
+  }
 }
 
 .site-footer__copy {
@@ -73,6 +86,14 @@
   font-family: var(--font-serif);
   font-style: italic;
   color: var(--accent-warm);
+  cursor: default;
+  transition: color var(--dur) var(--ease-out), text-shadow var(--dur) var(--ease-out);
+}
+
+/* For anyone who found it: the hint word warms and glows on hover. */
+.site-footer__hint-word:hover {
+  color: var(--accent-warm-soft);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent-warm) 55%, transparent);
 }
 
 @media (max-width: 768px) {

@@ -17,6 +17,7 @@ export default function Home({ onNavigate }) {
 
       <section className="home-section" aria-labelledby="tech-heading">
         <Reveal as="header" className="home-section__head">
+          <span className="home-section__index" aria-hidden="true">01</span>
           <h2 id="tech-heading">{t('home.tech.heading')}</h2>
           <p className="home-section__intro">{t('home.tech.intro')}</p>
         </Reveal>
@@ -27,6 +28,7 @@ export default function Home({ onNavigate }) {
 
       <section className="home-section" aria-labelledby="soft-heading">
         <Reveal as="header" className="home-section__head">
+          <span className="home-section__index" aria-hidden="true">03</span>
           <h2 id="soft-heading">{t('home.soft.heading')}</h2>
           <p className="home-section__intro">{t('home.soft.intro')}</p>
         </Reveal>

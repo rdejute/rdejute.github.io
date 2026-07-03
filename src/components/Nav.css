@@ -15,7 +15,11 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
   letter-spacing: 0.02em;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  background-image: none;               /* opt out of the inline-link underline */
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
 }
 
 .nav__link:hover {

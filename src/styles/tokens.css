@@ -2,20 +2,28 @@
    Values are the contract from ai-spec.md §6. Reference these everywhere;
    never put raw hex in component CSS. */
 
-:root {                      /* LIGHT theme (warm — NO white): oat + clay browns, sage FOCAL */
-  --bg:            #E6D8BF;   /* warm tan base */
-  --surface:       #EFE3CC;   /* lighter oat — header, footer, raised surfaces (never white) */
-  --surface-alt:   #DBC9A6;   /* deeper clay-tan — bands / hero strips */
-  --text:          #2E2015;
-  --text-muted:    #7A6A50;   /* warm brown */
-  --border:        rgba(46, 32, 21, 0.14);
+:root {                      /* LIGHT theme (NO white): warm earthy SAGE base, brown/gold/orange accents */
+  --bg:            #CAC6A0;   /* dusty, warm sage (olive-leaning, muted — not mint) */
+  --surface:       #D9D5B2;   /* lighter dusty sage — header, footer, raised surfaces */
+  --surface-alt:   #B8B389;   /* deeper dusty olive-sage — bands / hero strips */
+  --text:          #2A1F11;
+  --text-muted:    #665936;   /* warm brown */
+  --border:        rgba(42, 31, 17, 0.18);
 
-  --accent-warm:        #C26A38;   /* terracotta orange — typographic accent */
-  --accent-warm-soft:   #D08C5A;
-  --accent-cool:        #5F7E59;   /* sage — FOCAL: buttons, active nav, focus, icons */
-  --accent-cool-soft:   #88A580;
-  --accent-cool-deep:   #3E5439;   /* sage text/links on tan or on a sage tint (readable) */
-  --accent-cool-tint:   rgba(95, 126, 89, 0.18);
+  --accent-warm:        #BE571F;   /* burnt orange — typographic accent */
+  --accent-warm-soft:   #D8983B;   /* gold */
+  --accent-cool:        #5E6C3A;   /* warm olive-sage — active nav, focus, icons */
+  --accent-cool-soft:   #899467;
+  --accent-cool-deep:   #414B27;   /* deep olive-sage text/links (readable on the sage base) */
+  --accent-cool-tint:   rgba(94, 108, 58, 0.22);
+
+  /* Earthy interactive layer so the light theme isn't monochrome green:
+     brown primary buttons, terracotta focal glow, beige hover wash. */
+  --focal-accent:          #B0632C;                  /* warm ochre-brown — hover glows / borders */
+  --earth-tint:            rgba(120, 82, 45, 0.16);  /* beige-brown wash for hovers */
+  --btn-primary-bg:        #6E4A2C;                  /* earthy brown */
+  --btn-primary-bg-hover:  #855D39;
+  --btn-primary-fg:        #EFE8D6;                  /* warm cream (foreground only) */
 
   --font-display: "Space Grotesk", system-ui, sans-serif;  /* headings / name */
   --font-serif:   "Newsreader", Georgia, serif;            /* italic taglines, pull quotes */
@@ -24,7 +32,25 @@
 
   --radius-md: 8px;
   --radius-lg: 14px;
+  --radius-xl: 22px;
   --space:     8px;   /* base spacing unit; multiply for rhythm */
+
+  /* ---- Motion: named curves + durations (premium = consistent, not default) ---- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);    /* expo-out: confident settle */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);   /* symmetric, for toggles */
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);  /* gentle overshoot for lifts */
+  --dur-fast: 140ms;
+  --dur:      260ms;
+  --dur-slow: 520ms;
+
+  /* ---- Elevation: layered WARM shadows (tinted brown, never flat black) ---- */
+  --shadow-sm:  0 1px 2px rgba(46, 32, 21, 0.05), 0 2px 6px rgba(46, 32, 21, 0.05);
+  --shadow-md:  0 3px 10px rgba(46, 32, 21, 0.07), 0 12px 28px rgba(46, 32, 21, 0.10);
+  --shadow-lg:  0 8px 24px rgba(46, 32, 21, 0.10), 0 28px 56px rgba(46, 32, 21, 0.14);
+  /* Hover signature: ambient warm lift + a soft earthy bloom (the focal accent). */
+  --shadow-focal:
+    0 10px 24px rgba(42, 31, 17, 0.12),
+    0 18px 44px -12px color-mix(in srgb, var(--focal-accent) 55%, transparent);
 }
 
 [data-theme="dark"] {        /* DARK theme (espresso) — Raina's signature look */
@@ -41,4 +67,19 @@
   --accent-cool-soft:   #C4D6BD;
   --accent-cool-deep:   #C4D6BD;   /* sage text on a sage tint (light, for dark bg) */
   --accent-cool-tint:   rgba(157, 180, 149, 0.16);
+
+  /* Dark keeps sage as its focal/interactive accent (it works on espresso). */
+  --focal-accent:          var(--accent-cool);
+  --earth-tint:            rgba(217, 140, 95, 0.14);
+  --btn-primary-bg:        var(--accent-cool-deep);
+  --btn-primary-bg-hover:  var(--accent-cool);
+  --btn-primary-fg:        var(--surface);
+
+  /* Dark elevation: deeper black ambient (warm tint reads as mud on espresso). */
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.30), 0 2px 6px rgba(0, 0, 0, 0.28);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.34), 0 16px 36px rgba(0, 0, 0, 0.40);
+  --shadow-lg:  0 10px 28px rgba(0, 0, 0, 0.40), 0 32px 64px rgba(0, 0, 0, 0.48);
+  --shadow-focal:
+    0 12px 28px rgba(0, 0, 0, 0.42),
+    0 20px 48px -12px color-mix(in srgb, var(--focal-accent) 45%, transparent);
 }

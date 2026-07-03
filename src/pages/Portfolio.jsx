@@ -1,4 +1,5 @@
 import TimelineEntry from '../components/TimelineEntry'
+import Timeline from '../components/Timeline'
 import ProjectGrid from '../components/ProjectGrid'
 import ResumeDownload from '../components/ResumeDownload'
 import Reveal from '../components/Reveal'
@@ -27,10 +28,12 @@ export default function Portfolio() {
         <Reveal as="header" className="home-section__head">
           <h2 id="edu-heading">{t('portfolio.education.heading')}</h2>
         </Reveal>
-        <Reveal className="pf-timeline">
-          {EDUCATION.map((e) => (
-            <TimelineEntry key={e.key} titleKey={e.titleKey} orgKey={e.orgKey} datesKey={e.datesKey} />
-          ))}
+        <Reveal>
+          <Timeline>
+            {EDUCATION.map((e) => (
+              <TimelineEntry key={e.key} titleKey={e.titleKey} orgKey={e.orgKey} datesKey={e.datesKey} />
+            ))}
+          </Timeline>
         </Reveal>
       </section>
 
@@ -38,16 +41,18 @@ export default function Portfolio() {
         <Reveal as="header" className="home-section__head">
           <h2 id="work-heading">{t('portfolio.work.heading')}</h2>
         </Reveal>
-        <Reveal className="pf-timeline">
-          {WORK.map((w) => (
-            <TimelineEntry
-              key={w.key}
-              titleKey={w.titleKey}
-              orgKey={w.orgKey}
-              datesKey={w.datesKey}
-              descKey={w.descKey}
-            />
-          ))}
+        <Reveal>
+          <Timeline>
+            {WORK.map((w) => (
+              <TimelineEntry
+                key={w.key}
+                titleKey={w.titleKey}
+                orgKey={w.orgKey}
+                datesKey={w.datesKey}
+                descKey={w.descKey}
+              />
+            ))}
+          </Timeline>
         </Reveal>
       </section>
 

@@ -10,6 +10,8 @@ import Links from './pages/Links'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import BackOffice from './pages/BackOffice'
+import CursorGlow from './components/CursorGlow'
+import Preloader from './components/Preloader'
 
 // Public views switch by app state so the URL stays at root (ai-spec §3.1).
 // Secret views are reached only via the hash (#login/#backoffice) or the Konami
@@ -58,6 +60,11 @@ function AppRoutes() {
     }
   }, [session, view])
 
+  // Reset scroll to the top on every view change (state nav keeps position otherwise).
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [view])
+
   // Konami code opens the login view from anywhere.
   useKonamiCode(useCallback(() => navigate('login'), [navigate]))
 
@@ -68,13 +75,17 @@ function AppRoutes() {
   const Page = PAGES[guardedView] ?? Home
 
   return (
-    <Main current={guardedView} onNavigate={navigate}>
-      {guardedView === 'loading' ? (
-        <section className="home-section" aria-busy="true" />
-      ) : (
-        <Page onNavigate={navigate} />
-      )}
-    </Main>
+    <>
+      <Preloader />
+      <CursorGlow />
+      <Main current={guardedView} onNavigate={navigate}>
+        {guardedView === 'loading' ? (
+          <section className="home-section" aria-busy="true" />
+        ) : (
+          <Page onNavigate={navigate} />
+        )}
+      </Main>
+    </>
   )
 }
 

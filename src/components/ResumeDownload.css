@@ -1,8 +1,23 @@
 .resume-download {
   text-decoration: none;
+  overflow: hidden;
 }
 
 .resume-download__icon {
   width: 18px;
   height: 18px;
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+/* The icon nudges down on hover (a page about to be pulled). */
+@media (prefers-reduced-motion: no-preference) {
+  .resume-download:hover .resume-download__icon {
+    transform: translateY(2px);
+  }
+}
+
+/* Confirmation beat: settle back and let the check pop. */
+.resume-download.is-done .resume-download__icon {
+  color: var(--surface);
+  transform: none;
 }

@@ -1,0 +1,51 @@
+/* Timeline with a scroll-drawn sage rail down the left edge. */
+.pf-timeline {
+  position: relative;
+  padding-left: calc(var(--space) * 3);
+}
+
+.pf-timeline__rail {
+  position: absolute;
+  left: calc(var(--space) * 0.5);
+  top: calc(var(--space) * 2.5);
+  bottom: calc(var(--space) * 2.5);
+  width: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent-cool) 20%, transparent);
+  overflow: hidden;
+}
+
+.pf-timeline__rail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-cool);
+  transform-origin: top;
+  transform: scaleY(var(--fill, 0));
+}
+
+/* A node dot per entry, sitting on the rail. */
+.pf-timeline__entries .timeline-entry {
+  position: relative;
+}
+
+.pf-timeline__entries .timeline-entry::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--space) * -2.5 - 3px);
+  top: calc(var(--space) * 3);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  box-shadow: 0 0 0 2px var(--accent-cool);
+}
+
+@media (max-width: 768px) {
+  .pf-timeline {
+    padding-left: calc(var(--space) * 2.5);
+  }
+  .pf-timeline__entries .timeline-entry::before {
+    left: calc(var(--space) * -2 - 3px);
+  }
+}

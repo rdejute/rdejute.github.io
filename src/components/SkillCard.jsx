@@ -1,12 +1,14 @@
 import { useLanguage } from '../context/LanguageContext'
+import { useMagnetic } from '../hooks/useMagnetic'
 import './SkillCard.css'
 
-// One skill: icon + title + supporting sentence. Reused by both skill grids
-// (and reusable by the Portfolio page for project cards).
+// One skill: icon + title + supporting sentence. Reused by both skill grids.
+// The card drifts subtly toward the cursor (magnetic) on fine-pointer devices.
 export default function SkillCard({ icon, titleKey, descKey }) {
   const { t } = useLanguage()
+  const magneticRef = useMagnetic(0.12)
   return (
-    <article className="skill-card glow">
+    <article ref={magneticRef} className="skill-card glow">
       <span className="skill-card__icon" aria-hidden="true">
         <svg className="skill-card__glyph">
           <use href={`/icons.svg#${icon}-icon`} />

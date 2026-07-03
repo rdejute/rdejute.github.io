@@ -1,0 +1,60 @@
+/* Soft sage presence trailing the cursor. Never intercepts input. */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-cool) 55%, transparent),
+    transparent 70%
+  );
+  /* The blur turns the dot into an ambient warmth rather than a hard cursor. */
+  filter: blur(2px);
+  transition:
+    width var(--dur) var(--ease-spring),
+    height var(--dur) var(--ease-spring),
+    background var(--dur) var(--ease-out);
+  will-change: transform;
+}
+
+/* Swell over any interactive element. */
+.cursor-glow--link {
+  width: 52px;
+  height: 52px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-cool) 30%, transparent),
+    transparent 72%
+  );
+}
+
+/* Labelled state (e.g. project media → "view"): becomes a soft sage disc. */
+.cursor-glow--label {
+  width: 74px;
+  height: 74px;
+  filter: none;
+  background: color-mix(in srgb, var(--accent-cool) 88%, transparent);
+}
+
+.cursor-glow__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--surface);
+}
+
+/* Belt-and-suspenders: never show the JS glow under reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow { display: none; }
+}
