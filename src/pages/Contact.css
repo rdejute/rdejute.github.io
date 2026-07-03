@@ -1,3 +1,41 @@
+/* Form beside a warm illustration; the image stays in view (sticky) as you fill
+   the form on desktop, and stacks below it on mobile. */
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+  gap: calc(var(--space) * 5);
+  align-items: start;
+  margin-top: calc(var(--space) * 3);
+}
+
+.contact-media {
+  position: sticky;
+  top: calc(var(--space) * 4);
+  border-radius: var(--radius-xl);
+}
+
+.contact-media__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 860px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space) * 4);
+  }
+
+  .contact-media {
+    position: static;
+    order: 2;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
 /* Small human touch under the intro: a live "presence" badge. */
 .contact-badge {
   display: inline-flex;

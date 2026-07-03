@@ -175,6 +175,7 @@
     "heading": "Get in touch",
     "intro": "Have a role, a project, or just want to say hello? Send a message — it lands straight in my inbox.",
     "replyBadge": "Usually replies within a day",
+    "imageAlt": "Abstract illustration of a letter at the center of a warm, connected world",
     "name": { "label": "Name", "placeholder": "Your name" },
     "email": { "label": "Email", "placeholder": "you@example.com" },
     "message": { "label": "Message", "placeholder": "What's on your mind?" },

@@ -1,9 +1,13 @@
+import contactImage from '../assets/contact-image.png'
 import ContactForm from '../components/ContactForm'
+import ProgressiveImage from '../components/ProgressiveImage'
 import Reveal from '../components/Reveal'
 import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
 
-// Contact page: intro + the validated form that inserts into Supabase.
+// Contact page: intro + the validated form that inserts into Supabase, paired
+// with a warm illustration that carries the "a message travels" motif.
+// AI-generated graphic: src/assets/contact-image.png (tool: see docs/Research.md).
 export default function Contact() {
   const { t } = useLanguage()
   return (
@@ -16,9 +20,24 @@ export default function Contact() {
           {t('contact.replyBadge')}
         </p>
       </Reveal>
-      <Reveal>
-        <ContactForm />
-      </Reveal>
+
+      <div className="contact-layout">
+        <Reveal className="contact-layout__form">
+          <ContactForm />
+        </Reveal>
+
+        <Reveal className="contact-layout__media">
+          <div className="contact-media glow">
+            <ProgressiveImage
+              className="contact-media__img"
+              src={contactImage}
+              alt={t('contact.imageAlt')}
+              width="1122"
+              height="1402"
+            />
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }

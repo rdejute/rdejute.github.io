@@ -175,6 +175,7 @@
     "heading": "Me contacter",
     "intro": "Un poste, un projet, ou juste envie de dire bonjour ? Envoyez-moi un message — il arrive directement dans ma boîte de réception.",
     "replyBadge": "Réponse généralement sous 24 h",
+    "imageAlt": "Illustration abstraite d'une lettre au centre d'un monde chaleureux et connecté",
     "name": { "label": "Nom", "placeholder": "Votre nom" },
     "email": { "label": "Courriel", "placeholder": "vous@exemple.com" },
     "message": { "label": "Message", "placeholder": "Qu'avez-vous en tête ?" },
