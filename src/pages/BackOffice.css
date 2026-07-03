@@ -1,0 +1,60 @@
+.backoffice__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--space) * 2);
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.backoffice__head h1 {
+  margin: 0 0 calc(var(--space) * 0.5);
+}
+
+.backoffice__subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.backoffice__note {
+  color: var(--text-muted);
+}
+
+/* Warm, human empty state instead of a bare line. */
+.backoffice__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--space) * 1.5);
+  padding: calc(var(--space) * 7) calc(var(--space) * 2);
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.backoffice__empty-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--accent-cool);
+  opacity: 0.7;
+}
+
+/* Loading skeleton (warm shimmer rows). */
+.bo-skeleton {
+  padding: calc(var(--space) * 1.5) calc(var(--space) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 2);
+}
+
+.bo-skeleton__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr 1fr;
+  gap: calc(var(--space) * 2);
+}
+
+.bo-skeleton__cell {
+  height: 14px;
+}

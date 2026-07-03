@@ -1,121 +1,103 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useCallback, useEffect, useState } from 'react'
+import { ThemeProvider } from './context/ThemeContext'
+import { LanguageProvider } from './context/LanguageContext'
+import { AuthProvider, useAuth } from './context/AuthContext'
+import { useKonamiCode } from './hooks/useKonamiCode'
+import Main from './layouts/Main'
+import Home from './pages/Home'
+import Portfolio from './pages/Portfolio'
+import Links from './pages/Links'
+import Contact from './pages/Contact'
+import Login from './pages/Login'
+import BackOffice from './pages/BackOffice'
+import CursorGlow from './components/CursorGlow'
+import Preloader from './components/Preloader'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Public views switch by app state so the URL stays at root (ai-spec §3.1).
+// Secret views are reached only via the hash (#login/#backoffice) or the Konami
+// code, and appear in no navigation.
+const PAGES = {
+  home: Home,
+  portfolio: Portfolio,
+  links: Links,
+  contact: Contact,
+  login: Login,
+  backoffice: BackOffice,
+}
+
+const VIEW_BY_HASH = { '#login': 'login', '#backoffice': 'backoffice' }
+const HASH_BY_VIEW = { login: '#login', backoffice: '#backoffice' }
+
+const viewFromHash = () => VIEW_BY_HASH[window.location.hash] ?? 'home'
+
+function AppRoutes() {
+  const { session, loading } = useAuth()
+  const [view, setView] = useState(viewFromHash)
+
+  const navigate = useCallback((next) => {
+    const hash = HASH_BY_VIEW[next]
+    if (hash) {
+      window.location.hash = hash // fires hashchange → setView
+    } else if (window.location.hash) {
+      // Clear the hash but keep the URL at root (no reload, no history entry).
+      window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    }
+    setView(next)
+  }, [])
+
+  // Keep the view in sync when the hash changes (typed URL, back/forward).
+  useEffect(() => {
+    const onHashChange = () => setView(viewFromHash())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  // A logged-in admin landing on #login goes straight to the Back Office.
+  // Update the hash (not state) here; the hashchange listener syncs the view.
+  useEffect(() => {
+    if (session && view === 'login') {
+      window.location.hash = HASH_BY_VIEW.backoffice
+    }
+  }, [session, view])
+
+  // Reset scroll to the top on every view change (state nav keeps position otherwise).
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [view])
+
+  // Konami code opens the login view from anywhere.
+  useKonamiCode(useCallback(() => navigate('login'), [navigate]))
+
+  // Guard the Back Office: no session → login (once the session check resolves).
+  let guardedView = view
+  if (view === 'backoffice' && !session) guardedView = loading ? 'loading' : 'login'
+
+  const Page = PAGES[guardedView] ?? Home
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <Preloader />
+      <CursorGlow />
+      <Main current={guardedView} onNavigate={navigate}>
+        {guardedView === 'loading' ? (
+          <section className="home-section" aria-busy="true" />
+        ) : (
+          <Page onNavigate={navigate} />
+        )}
+      </Main>
     </>
+  )
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
 

@@ -1,0 +1,22 @@
+/* Blur-up load-in. Kept separate from card hover transforms so the two don't
+   fight: this animates opacity + filter only. */
+.progressive-img {
+  opacity: 0;
+  filter: blur(14px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    filter var(--dur-slow) var(--ease-out);
+}
+
+.progressive-img.is-loaded {
+  opacity: 1;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressive-img {
+    opacity: 1;
+    filter: none;
+    transition: none;
+  }
+}

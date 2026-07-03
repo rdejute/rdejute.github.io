@@ -1,0 +1,107 @@
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.site-footer__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: calc(var(--space) * 4) calc(var(--space) * 2.5);
+}
+
+.site-footer__tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--accent-warm);
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.site-footer__groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space) * 5);
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.site-footer__heading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: var(--space);
+}
+
+.site-footer__email {
+  color: var(--text);
+}
+
+.site-footer__socials {
+  display: flex;
+  gap: calc(var(--space) * 2);
+}
+
+.site-footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.75);
+  color: var(--text);
+  background-image: none;               /* opt out of the inline-link underline */
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.site-footer__social:hover {
+  color: var(--accent-cool-deep);
+}
+
+.site-footer__icon {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-footer__social:hover .site-footer__icon {
+    transform: translateY(-2px);
+  }
+}
+
+.site-footer__copy {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Subtle Konami-code hint. */
+.site-footer__hint {
+  margin: calc(var(--space) * 1.5) 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.site-footer__hint-word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent-warm);
+  cursor: default;
+  transition: color var(--dur) var(--ease-out), text-shadow var(--dur) var(--ease-out);
+}
+
+/* For anyone who found it: the hint word warms and glows on hover. */
+.site-footer__hint-word:hover {
+  color: var(--accent-warm-soft);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent-warm) 55%, transparent);
+}
+
+@media (max-width: 768px) {
+  .site-footer__inner {
+    padding: calc(var(--space) * 3) calc(var(--space) * 2);
+  }
+
+  .site-footer__groups {
+    gap: calc(var(--space) * 3);
+  }
+}

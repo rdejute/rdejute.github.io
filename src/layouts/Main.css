@@ -1,0 +1,62 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  position: relative;
+}
+
+/* Ambient "light in the room": a soft warm bloom whose vertical position tracks
+   scroll, so the light appears to travel down the page as you read. Barely
+   perceptible by design; fixed and non-interactive. */
+.ambient-light {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      42rem 42rem at 78% calc(-10% + var(--page-scroll, 0) * 120%),
+      color-mix(in srgb, var(--accent-warm) 22%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      36rem 36rem at 12% calc(120% - var(--page-scroll, 0) * 120%),
+      color-mix(in srgb, var(--accent-cool) 18%, transparent),
+      transparent 60%
+    );
+  opacity: 0.5;
+}
+
+/* Dark mode: drop the left sage halo (distracting on espresso) but keep the
+   warm bloom that tracks scroll on the right. */
+[data-theme="dark"] .ambient-light {
+  background: radial-gradient(
+    42rem 42rem at 78% calc(-10% + var(--page-scroll, 0) * 120%),
+    color-mix(in srgb, var(--accent-warm) 22%, transparent),
+    transparent 60%
+  );
+}
+
+/* Content sits above the ambient layer. The header (sticky) and bottom nav keep
+   their own higher z-index; only the in-flow main + footer need lifting off 0. */
+.layout > .layout__main,
+.layout > .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.layout__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: calc(var(--space) * 5) calc(var(--space) * 2.5);
+}
+
+@media (max-width: 768px) {
+  .layout__main {
+    padding: calc(var(--space) * 3) calc(var(--space) * 2);
+    /* Clear the fixed bottom nav bar so content isn't hidden behind it. */
+    padding-bottom: calc(var(--space) * 11);
+  }
+}

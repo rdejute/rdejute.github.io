@@ -1,0 +1,69 @@
+.skill-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--space) * 3);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 1.5);
+  height: 100%;
+  transition:
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+/* Warm ambient lift + sage bloom, and the hairline border warms to sage. */
+.skill-card:hover {
+  box-shadow: var(--shadow-focal);
+  border-color: color-mix(in srgb, var(--focal-accent) 40%, var(--border));
+}
+
+/* Gentle spring lift — motion, so only when motion is welcome. */
+@media (prefers-reduced-motion: no-preference) {
+  .skill-card {
+    transition:
+      transform var(--dur) var(--ease-spring),
+      box-shadow var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.skill-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--accent-cool-tint);
+  color: var(--accent-cool);
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+/* The icon leans in a touch as the card lifts. */
+@media (prefers-reduced-motion: no-preference) {
+  .skill-card:hover .skill-card__icon {
+    transform: scale(1.08) rotate(-3deg);
+  }
+}
+
+.skill-card__glyph {
+  width: 26px;
+  height: 26px;
+}
+
+.skill-card__title {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.skill-card__desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}

@@ -1,0 +1,60 @@
+.why__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: calc(var(--space) * 4);
+  align-items: center;
+}
+
+/* The throughline: a faint sage track whose fill is drawn by scroll (--fill,
+   set by useScrollFill). Threads the human-services past into the code present. */
+.why__thread {
+  position: absolute;
+  left: calc(var(--space) * -2);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent-cool) 20%, transparent);
+  overflow: hidden;
+}
+
+.why__thread::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-cool);
+  transform-origin: top;
+  transform: scaleY(var(--fill, 0));
+}
+
+.why__text h2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.9rem;
+  color: var(--accent-warm);
+  margin: 0 0 calc(var(--space) * 2);
+}
+
+.why__text p {
+  color: var(--text);
+  margin: 0;
+}
+
+.why__image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 768px) {
+  .why__inner {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space) * 2.5);
+  }
+
+  .why__image {
+    order: -1;
+    max-width: 320px;
+  }
+}

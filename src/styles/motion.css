@@ -1,0 +1,100 @@
+/* Award-tier motion layer: shared keyframes, entrance utilities, page + theme
+   transitions. Every animation here is gated behind prefers-reduced-motion so
+   the whole system collapses to a calm, static site when motion isn't welcome.
+   Colors/curves come from tokens.css — never raw values. */
+
+/* ---------- Generic entrance: fade + rise + focus-in ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .rise-in {
+    opacity: 0;
+    animation: rise-in var(--dur-slow) var(--ease-out) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(16px); filter: blur(6px); }
+    to   { opacity: 1; transform: none;             filter: none; }
+  }
+
+  /* Display type that resolves *into focus*: loose→tight tracking + deblur. */
+  .focus-in {
+    opacity: 0;
+    animation: focus-in var(--dur-slow) var(--ease-out) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
+  @keyframes focus-in {
+    from { opacity: 0; letter-spacing: 0.12em; filter: blur(10px); transform: translateY(10px); }
+    to   { opacity: 1; letter-spacing: -0.035em; filter: none; transform: none; }
+  }
+}
+
+/* ---------- Page (route) transition: incoming content rises in ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: page-enter var(--dur-slow) var(--ease-out) both;
+  }
+
+  @keyframes page-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+/* ---------- Theme toggle: radial wipe of the new palette from the switch ----------
+   View Transitions API. We suppress the default cross-fade and clip the NEW
+   snapshot from a circle grown at the click point (animation driven in JS). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { z-index: 0; }
+::view-transition-new(root) { z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Honor reduced motion even if a transition slips through. */
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none !important; }
+}
+
+/* ---------- Skeleton shimmer (warm, not grey) ---------- */
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    var(--surface-alt) 30%,
+    color-mix(in srgb, var(--accent-cool) 12%, var(--surface-alt)) 50%,
+    var(--surface-alt) 70%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-md);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton { animation: shimmer 1.4s ease-in-out infinite; }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+  }
+}
+
+/* ---------- Empathetic error shake (gentle, never a violent buzz) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .shake { animation: shake 0.5s var(--ease-in-out); }
+  @keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+  }
+}
+
+/* ---------- One-time sage pulse (draws the eye to the newest row) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .pulse-once { animation: pulse-once 1.6s var(--ease-out) 1; }
+  @keyframes pulse-once {
+    0%   { box-shadow: inset 3px 0 0 0 transparent, 0 0 0 0 var(--accent-cool-tint); }
+    30%  { box-shadow: inset 3px 0 0 0 var(--accent-cool), 0 0 0 6px var(--accent-cool-tint); }
+    100% { box-shadow: inset 3px 0 0 0 transparent, 0 0 0 0 transparent; }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "aria": "Navigation principale",
+    "home": "Accueil",
+    "portfolio": "Portfolio",
+    "links": "Liens",
+    "contact": "Contact"
+  },
+  "logo": {
+    "alt": "Raina DeJute — accueil"
+  },
+  "controls": {
+    "theme": "Basculer le thème clair et sombre",
+    "language": "Changer de langue"
+  },
+  "field": {
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
+  },
+  "footer": {
+    "tagline": "L'empathie est mon cadre de travail.",
+    "contactHeading": "Me contacter",
+    "emailLabel": "Écrire à Raina",
+    "social": "Me retrouver en ligne",
+    "rights": "Tous droits réservés.",
+    "hint": "Un indice ?"
+  },
+  "home": {
+    "eyebrow": "Le front-end d'abord · Guidée par l'empathie",
+    "name": "Raina DeJute",
+    "role": "Développeuse full-stack native de l'IA, au cœur front-end",
+    "tagline": "L'empathie est mon cadre de travail.",
+    "intro": "Développeuse full-stack, axée front-end. Je viens des services à la personne, avant la tech, et j'apporte cette même rigueur à la livraison — des projets livrés à temps, cadrés sur ce dont le client a réellement besoin, pas sur ce qui est facile à construire. React à l'avant, Spring Boot et Node derrière, native de l'IA, de la spec à la livraison.",
+    "ctaWork": "Voir mon travail",
+    "ctaContact": "Me contacter",
+    "portraitAlt": "Portrait de Raina DeJute",
+    "chips": {
+      "a": "Le front-end d'abord",
+      "b": "Guidée par l'empathie",
+      "c": "Flux de travail natif de l'IA"
+    },
+    "tech": {
+      "heading": "Mes outils",
+      "intro": "Une boîte à outils full-stack pragmatique — choisie pour répondre au problème, pas pour gonfler un CV."
+    },
+    "soft": {
+      "heading": "Ce que j'apporte à une équipe",
+      "intro": "Les compétences humaines venues avant les compétences techniques — et qui ouvrent toujours la voie."
+    },
+    "why": {
+      "heading": "Pourquoi je construis",
+      "body": "Avant d'écrire du code, j'ai passé des années dans les services à la personne — à accompagner des gens à travers le rétablissement, la crise et les nouveaux départs. J'ai appris à entendre ce dont quelqu'un a besoin avant même qu'il puisse le dire, et à créer les conditions pour qu'il se sente en sécurité. Je fais le même travail aujourd'hui avec d'autres outils : je façonne une interface comme j'arrangeais autrefois une pièce — pour que la personne de l'autre côté se sente vue, et un peu moins coincée. Cet instinct est le fil conducteur entre qui j'étais et ce que je construis.",
+      "imageAlt": "Illustration chaleureuse de deux personnes qui se rejoignent"
+    },
+    "skills": {
+      "frontend": {
+        "title": "React et React Native",
+        "desc": "Je construis des interfaces réactives et accessibles en React — et je les rends multiplateformes avec React Native quand un projet doit vivre sur un téléphone."
+      },
+      "backend": {
+        "title": "Spring Boot et Node",
+        "desc": "Côté serveur, je conçois des API en Spring Boot et Node qui sont prévisibles, documentées et agréables pour la prochaine personne qui développe."
+      },
+      "data": {
+        "title": "SQL et MongoDB",
+        "desc": "Je modélise les données en SQL relationnel comme en MongoDB orienté documents, en choisissant la forme qui convient au problème plutôt que d'en imposer une."
+      },
+      "ai": {
+        "title": "Natif de l'IA, piloté par les specs",
+        "desc": "Je travaille spec d'abord, avec l'IA comme collaboratrice — j'écris des spécifications claires, puis je les itère pour que le code reste intentionnel et non improvisé."
+      },
+      "resilience": {
+        "title": "Résilience",
+        "desc": "J'ai recommencé à zéro plus d'une fois et reconstruit avec intention. Les problèmes difficiles ne me déstabilisent pas — ils me concentrent."
+      },
+      "communication": {
+        "title": "Communication",
+        "desc": "Des années à accompagner des gens dans des conversations difficiles m'ont appris à être claire, calme et honnête — à signaler un blocage tôt et à expliquer un compromis sans jargon."
+      },
+      "accountability": {
+        "title": "Responsabilité",
+        "desc": "Je travaille de façon native avec l'IA, mais j'assume chaque ligne. Je lis ce que je génère, je m'assure de le comprendre et je réponds de ce qui est livré. L'outil m'accélère ; il ne m'excuse pas."
+      },
+      "selfDirection": {
+        "title": "Autonomie",
+        "desc": "Je n'attends pas qu'on me confie un problème. J'ai construit seule un tableau de bord de risque crypto et un outil d'épicerie tenant compte de l'itinéraire — parce que j'ai vu un besoin et que je m'y suis mise."
+      }
+    }
+  },
+  "portfolio": {
+    "heading": "Portfolio",
+    "intro": "Formation, expérience et quelques réalisations. Le CV ci-dessous reprend le contenu de cette page.",
+    "resume": "Télécharger le CV (PDF)",
+    "education": { "heading": "Formation" },
+    "work": { "heading": "Expérience" },
+    "projects": {
+      "heading": "Projets",
+      "intro": "Un mélange de projets de type client et de choses que j'ai construites parce que j'en voyais le besoin."
+    },
+    "edu": {
+      "codeboxx": { "title": "Programme de développement full-stack", "org": "CodeBoxx Academy", "dates": "mars 2026 – juill. 2026" },
+      "crps": { "title": "Spécialiste certifiée du soutien par les pairs en rétablissement", "org": "Certification en soutien par les pairs", "dates": "2025" },
+      "diploma": { "title": "Diplôme d'études secondaires", "org": "Formation générale", "dates": "2016" }
+    },
+    "jobs": {
+      "coordinator": {
+        "title": "Coordonnatrice de la réussite étudiante",
+        "org": "CodeBoxx Academy",
+        "dates": "2026 – présent",
+        "desc": "J'accompagne les étudiant·es dans un programme full-stack intensif — en les débloquant sur le plan technique et personnel, en suivant leur progression et en maintenant l'élan quand le travail devient difficile."
+      },
+      "humanServices": {
+        "title": "Services à la personne",
+        "org": "Armée du Salut (gestionnaire de résidence) · Volunteers of America (spécialiste du soutien par les pairs)",
+        "dates": "janv. 2023 – janv. 2026",
+        "desc": "Des années aux côtés de personnes en rétablissement et en crise : soutien par les pairs, désescalade et leadership jusqu'au poste de gestionnaire de résidence. J'ai mis en place des routines quotidiennes et des structures communautaires qui ont aidé des résident·es vulnérables à se sentir en sécurité et à rester stables."
+      }
+    },
+    "proj": {
+      "crypto": {
+        "name": "Tableau de bord d'analyse crypto",
+        "desc": "Un modèle de risque DCA par régression logarithmique qui note le marché de 0 à 1 — transformant des données de prix et de sentiment bruyantes en un signal qu'une personne peut réellement lire avant d'acheter.",
+        "alt": "Capture d'écran du tableau de bord de risque d'analyse crypto"
+      },
+      "grocery": {
+        "name": "Outil d'épicerie tenant compte de l'itinéraire",
+        "desc": "Construit votre liste d'épicerie, puis l'ordonne pour suivre le vrai chemin à travers le magasin — pour faire vos courses en un seul passage, sans revenir sur vos pas.",
+        "alt": "Illustration de l'outil d'épicerie tenant compte de l'itinéraire"
+      },
+      "rocket": {
+        "name": "Rocket Food Delivery (mobile)",
+        "desc": "Une application React Native sur Expo communiquant avec un backend Spring Boot : connexion, navigation dans les restaurants, menus et suivi de commande — ma première pile mobile complète, de bout en bout.",
+        "alt": "Capture d'écran de l'application mobile Rocket Food Delivery"
+      },
+      "portfolio": {
+        "name": "Ce portfolio",
+        "desc": "Le site sur lequel vous êtes — React + Vite, Supabase et GitHub Actions, construit de façon native avec l'IA et spec d'abord. Chaque fonctionnalité a commencé par une spécification écrite avant la moindre ligne de code.",
+        "alt": "Illustration représentant ce site portfolio"
+      }
+    }
+  },
+  "links": {
+    "heading": "Liens",
+    "intro": "Où me trouver, et quelques endroits qui ont façonné ma façon de penser.",
+    "newTab": "ouvre dans un nouvel onglet",
+    "items": {
+      "linkedin": {
+        "title": "LinkedIn",
+        "desc": "Connectez-vous avec moi sur le plan professionnel — mon parcours, mes rôles et l'histoire complète des services à la personne au développement.",
+        "alt": "Raina DeJute sur LinkedIn"
+      },
+      "github": {
+        "title": "GitHub",
+        "desc": "Parcourez le code derrière mes projets, y compris ce portfolio.",
+        "alt": "Raina DeJute sur GitHub"
+      },
+      "youtube": {
+        "title": "YouTube",
+        "desc": "Des vidéos explicatives pour chaque module — résolution de LeetCode, explication de mon code et décryptage des concepts qui posent problème.",
+        "alt": "La chaîne YouTube de Raina DeJute"
+      },
+      "codeboxx": {
+        "title": "CodeBoxx",
+        "desc": "Le programme full-stack qui a façonné ce chapitre de ma carrière — intensif, axé sur les projets, et là où ce site est né.",
+        "alt": "Programme full-stack CodeBoxx"
+      },
+      "cryptoverse": {
+        "title": "Into The Cryptoverse",
+        "desc": "L'analyse crypto fondée sur les données de Benjamin Cowen — le travail analytique qui a inspiré mon tableau de bord de risque crypto.",
+        "alt": "Analyse crypto Into The Cryptoverse"
+      }
+    }
+  },
+  "contact": {
+    "heading": "Me contacter",
+    "intro": "Un poste, un projet, ou juste envie de dire bonjour ? Envoyez-moi un message — il arrive directement dans ma boîte de réception.",
+    "replyBadge": "Réponse généralement sous 24 h",
+    "imageAlt": "Illustration abstraite d'une lettre au centre d'un monde chaleureux et connecté",
+    "name": { "label": "Nom", "placeholder": "Votre nom" },
+    "email": { "label": "Courriel", "placeholder": "vous@exemple.com" },
+    "message": { "label": "Message", "placeholder": "Qu'avez-vous en tête ?" },
+    "submit": "Envoyer le message",
+    "sending": "Envoi…",
+    "unavailable": "Le formulaire de contact est temporairement indisponible. Écrivez-moi directement par courriel.",
+    "errors": {
+      "name": "Veuillez saisir votre nom.",
+      "email": "Veuillez saisir une adresse courriel valide.",
+      "message": "Veuillez saisir un message."
+    },
+    "feedback": {
+      "success": "Message envoyé ! Merci — je vous répondrai bientôt.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    }
+  },
+  "login": {
+    "heading": "Connexion admin",
+    "email": { "label": "Courriel", "placeholder": "admin@example.com" },
+    "password": { "label": "Mot de passe", "placeholder": "Votre mot de passe" },
+    "submit": "Se connecter",
+    "submitting": "Connexion…",
+    "error": "Identifiants invalides."
+  },
+  "backoffice": {
+    "heading": "Back-office",
+    "signedInAs": "Connecté en tant que",
+    "logout": "Se déconnecter",
+    "loading": "Chargement des messages…",
+    "error": "Impossible de charger les messages. Veuillez réessayer.",
+    "empty": "Aucun message pour le moment.",
+    "view": "Voir",
+    "delete": "Supprimer",
+    "cols": {
+      "name": "Nom",
+      "email": "Courriel",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "modal": {
+      "close": "Fermer"
+    }
+  },
+  "pages": {
+    "home": { "title": "Accueil", "placeholder": "Contenu de l'accueil à venir." },
+    "portfolio": { "title": "Portfolio", "placeholder": "Contenu du portfolio à venir." },
+    "links": { "title": "Liens", "placeholder": "Contenu des liens à venir." },
+    "contact": { "title": "Contact", "placeholder": "Contenu du contact à venir." }
+  }
+}
