@@ -11,17 +11,14 @@ naming the tool used. This is a graded requirement.").
 | "Why I Build" graphic | `src/assets/connection-graphic.png` | **ChatGPT Images** | Image #2 on the Home page (`WhyIBuild.jsx`). |
 | Grocery project graphic | `src/assets/grocery-graphic.png` | **ChatGPT Images** | AI thematic image, Portfolio "Route-Aware Grocery Tool". |
 | Portfolio project graphic | `src/assets/portfolio-graphic.png` | **Gemini Images** | AI thematic image, Portfolio "This Portfolio". |
-| LinkedIn link banner | `src/assets/links/linkedin.png` | **AI — confirm tool** | Links page card (`LinkCard.jsx`). |
-| GitHub link banner | `src/assets/links/github.png` | **AI — confirm tool** | Links page card. |
-| YouTube link banner | `src/assets/links/youtube.png` | **AI — confirm tool** | Links page card. |
-| Into The Cryptoverse banner | `src/assets/links/crypto.png` | **AI — confirm tool** | Links page card. |
-| CodeBoxx link banner | `src/assets/links/codeboxx.png` | **AI — confirm tool** | Links page card. |
+| LinkedIn link banner | `src/assets/links/linkedin.png` | **AI — Gemini** | Links page card (`LinkCard.jsx`). |
+| GitHub link banner | `src/assets/links/github.png` | **AI — Gemini** | Links page card. |
+| YouTube link banner | `src/assets/links/youtube.png` | **AI — Gemini** | Links page card. |
+| Into The Cryptoverse banner | `src/assets/links/crypto.png` | **AI — Gemini** | Links page card. |
+| CodeBoxx link banner | `src/assets/links/codeboxx.png` | **AI — Gemini** | Links page card. |
 
 These Links-page banners satisfy the Links page's "≥1 AI-generated image" requirement.
 
 Real (non-AI) screenshots on the Portfolio page: `src/assets/crypto-risk-desk.png`,
 `src/assets/rdelivery.png`.
 
-## Action needed
-- Confirm the AI tool for the two Portfolio project graphics above (assumed ChatGPT Images).
-- Confirm the AI tool used for the four Links-page banners.

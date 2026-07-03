@@ -1,8 +1,9 @@
 # Video 2 — Technical Demo & Code Overview (word-for-word script)
 
-> Read aloud on camera. Target: ~8–10 minutes. Voice: warm, plain, confident. **[screen: …]** lines
-> are stage directions. For every requirement there's a **UI** move (what I click) and a **CODE** move
-> (what file + line I open and what I say).
+> Read aloud on camera. Target: **~12 minutes** — this version is paced to give each requirement room
+> to breathe and to actually explain the internals, not rush them. Voice: warm, plain, confident.
+> **[screen: …]** lines are stage directions. For every requirement there's a **UI** move (what I click)
+> and a **CODE** move (what file + line I open and what I say about how it works).
 >
 > ⚠️ Line numbers are a snapshot as of this writing — if I edit code before recording, re-verify.
 > A few requirements can't be shown in the running app; I call those out explicitly instead of skipping
@@ -12,335 +13,400 @@
 
 ## Opening line
 
-Hi, I'm Raina DeJute. This is a technical walkthrough of my Module 16 capstone — my portfolio, built in
-React and Vite with Supabase as the only backend, deployed to GitHub Pages, live at rdejute dot github
-dot io. I'm going to go feature by feature and, for each requirement, show it working on screen and
-then show you the code that makes it work.
+Hi, I'm Raina DeJute. This is a technical walkthrough of my Module 16 capstone — my portfolio. It's a
+React and Vite single-page app, it uses Supabase as its only backend — no server of my own — and it
+deploys to GitHub Pages. It's live at rdejute dot github dot io.
+
+I'm going to go feature by feature. For each requirement I'll show it working on screen first, and then
+I'll open the code and explain not just *where* it lives but *how* it actually works underneath — the
+state, the navigation, the Supabase calls, the auth, the row-level security, the theme tokens, all of
+it. Let's start at the foundation and work up.
 
 ---
 
 ## 1. Setup & Deploy
 
-**Repo, branches, collaborators.**
-- **UI:** [screen: GitHub repo page] The repo is public and named `rdejute.github.io`, coaches are
-  added as collaborators, and the branch list shows `main`, `dev`, and feature branches. [screen:
-  commit/network graph] You can see the feature-into-dev-into-main flow; nothing is committed straight
-  to main.
-- **CODE / note:** This one lives on GitHub, not in the app — I'm showing it in the GitHub UI, which is
-  where it's meant to be verified.
-
 **Vite scaffold + base path.**
-- **UI:** [screen: the site loading at the root URL] It loads at the domain root, no subpath.
-- **CODE:** [screen: `vite.config.js`] Line 7 sets `base: '/'` — that's what makes a root-repo
-  GitHub Pages deploy resolve its assets correctly.
+- **UI:** [screen: the site loading at the root URL] It's a Vite React app, and it loads at the domain
+  root — no subpath, no slash-anything.
+- **CODE:** [screen: `vite.config.js`] The one thing that matters here is line 7, `base: '/'`. When you
+  deploy to a `username.github.io` repo, the site is served from the domain root, so the base has to be
+  a single slash — otherwise every script and image would try to load from the wrong path and the page
+  would come up blank. This one line is the difference between a working deploy and a white screen.
 
-**CI/CD workflow.**
-- **UI:** [screen: GitHub → Actions tab] Every push to main runs this workflow and deploys. Pages is set
-  to serve from GitHub Actions [screen: Settings → Pages].
-- **CODE:** [screen: `.github/workflows/deploy.yml`] Line 6 — it triggers on push to `main`. Line 34
-  runs `npm ci`, line 37 runs `npm run build`, line 47 uploads the `dist` folder, and line 60 deploys
-  it to Pages.
+**CI/CD workflow — build and deploy on every push to main.**
+- **UI:** [screen: GitHub → Actions tab, showing a green run; then Settings → Pages showing "GitHub
+  Actions" as the source] I don't deploy by hand. Every time I push to main, this workflow runs and
+  publishes the site, and Pages is set to serve from that Actions deployment.
+- **CODE:** [screen: `.github/workflows/deploy.yml`] Line 6 is the trigger — a push to `main`. Then it's
+  a clean, boring pipeline, which is what you want: line 34 runs `npm ci` for a reproducible install,
+  line 37 runs `npm run build` to produce the static `dist` folder, line 47 uploads that folder as the
+  Pages artifact, and line 60 deploys it. So the flow is: push to main, build, publish — no manual step
+  where I could forget something on submission day.
 
-**Environment variables / secrets.**
-- **UI:** [screen: GitHub → Settings → Secrets] The Supabase URL and key are stored as Actions secrets,
-  not in the repo.
-- **CODE:** [screen: `deploy.yml` lines 40–44] They're injected into the build here as `VITE_` vars.
-  [screen: `.gitignore`] `.env` is gitignored — it's never committed. And I only ever use the public
-  anon key; the secret service-role key appears nowhere in the code.
+**Environment variables and secrets.**
+- **UI:** [screen: GitHub → Settings → Secrets and variables → Actions] My Supabase URL and key live
+  here as encrypted Actions secrets — not in the repo.
+- **CODE:** [screen: `deploy.yml` lines 40–44] At build time the workflow injects them as `VITE_`
+  variables. The `VITE_` prefix is important: Vite only exposes variables with that prefix to the
+  browser bundle, so it's deliberate about what's public. [screen: `.gitignore`] My local `.env` is
+  gitignored, so it's never committed. And I want to be explicit: the only key I ever use client-side is
+  the public anon key. The secret service-role key appears **nowhere** in this codebase — and in a
+  second I'll show you why the anon key being public is completely fine by design.
 
-**Supabase client, single instance + graceful fallback.**
-- **CODE:** [screen: `src/lib/supabaseClient.js`] The client is created exactly once, here at line 24,
-  and imported everywhere else — never `new`'d inside a component. And lines 12–21 are the fallback: if
-  the env vars are missing, it doesn't crash — it sets `isSupabaseConfigured` to false and logs a
-  warning, so the contact form and login can show a disabled state.
+**The Supabase client — created once, with a graceful fallback.**
+- **CODE:** [screen: `src/lib/supabaseClient.js`] The client is created exactly one time, right here at
+  line 24, and imported everywhere else in the app. I never call `createClient` inside a component —
+  that would spin up duplicate connections and make auth state inconsistent. And lines 12 through 21 are
+  the safety net: if the environment variables are missing, the app doesn't throw and die. It sets a
+  flag, `isSupabaseConfigured`, to false and logs a clear warning, so the contact form and the login
+  screen can quietly show a disabled state instead of crashing the whole page. Graceful degradation
+  instead of a stack trace.
 
-**Database + RLS.**
-- **UI:** [screen: Supabase dashboard → Table editor → `messages`, then Auth → Policies] Here's the
-  table with `name`, `email`, `message`, `created_at`, and the three RLS policies.
-- **CODE:** [screen: `supabase/schema.sql`] The table's at line 5, RLS is enabled at line 13, and the
-  policies: public can only INSERT at line 16, only authenticated can SELECT at line 22, only
-  authenticated can DELETE at line 28.
-- **Note (shown in dashboard, not the app):** email/password auth is enabled and the admin user is
-  created manually in the Supabase dashboard — there's no sign-up page in the app by design. And to
-  prove RLS actually blocks public reads, [screen: dashboard SQL or console] a read as the anon role
-  returns nothing.
+**The database and Row-Level Security.**
+- **UI:** [screen: Supabase dashboard → Table editor → `messages`; then Authentication → Policies] Here's
+  the one table, `messages`, with name, email, message, and a created-at timestamp. And here are the
+  three security policies on it.
+- **CODE:** [screen: `supabase/schema.sql`] The table is defined at line 5. Line 13 turns on Row-Level
+  Security — and this is the heart of the whole security model. Line 16: the public, the "anon" role,
+  may only **insert**. That's the contact form. Line 22: only an **authenticated** user may **select** —
+  read — messages. Line 28: only an authenticated user may **delete**. So a random visitor can drop a
+  message into my inbox, but they can never read it back or delete anything. That's why the public anon
+  key is safe to ship in the browser: the key can't do anything these policies don't allow. The security
+  isn't hidden in my JavaScript — it's enforced by Postgres itself.
+- **Note (shown in the dashboard, not the app):** email-and-password auth is enabled in Supabase, and
+  the single admin user is created by hand in the dashboard — there's intentionally no sign-up page. And
+  to actually prove the read is blocked, [screen: dashboard SQL editor running a select as anon] a
+  public read of `messages` comes back empty.
 
 ---
 
 ## 2. Layout — header, footer, logo, responsive nav
 
-**Main layout + semantic structure.**
-- **UI:** [screen: any page] Header on top, content, footer on the bottom — consistent on every page.
-- **CODE:** [screen: `src/layouts/Main.jsx`] `Main` wraps a `<header>`, a `<main>`, and a `<footer>`;
-  the mobile bottom nav is also rendered here.
+**The Main layout and semantic structure.**
+- **UI:** [screen: any page] Header on top, content in the middle, footer at the bottom — identical frame
+  on every page.
+- **CODE:** [screen: `src/layouts/Main.jsx`] `Main` is the shell that wraps every page. It renders a
+  real `<header>`, a `<main>` for the page content, and a `<footer>`, plus the fixed bottom nav for
+  mobile. Using the semantic tags — not just a pile of divs — is what makes it navigable for screen
+  readers.
 
-**Sticky header + nav to the four public pages + active state.**
-- **UI:** [screen: scroll down — header stays; click between pages; the active item is highlighted]
-- **CODE:** [screen: `src/components/Header.css` line 2] `position: sticky`. [screen:
-  `src/components/navItems.js` lines 5–10] The four public items live in one array — note Login and
-  Back Office are deliberately not here. [screen: `src/components/Nav.jsx`] Both the desktop and mobile
-  nav render from that same array; line 19 adds the active class and line 20 sets
-  `aria-current="page"`.
+**Sticky header, links to the four public pages, and an active indicator.**
+- **UI:** [screen: scroll down — the header stays pinned; click between pages; the current page's nav
+  item is highlighted]
+- **CODE:** [screen: `src/components/Header.css` line 2] `position: sticky` keeps it visible as you
+  scroll. [screen: `src/components/navItems.js` lines 5–10] Here's a detail I care about: the four
+  public nav items live in **one** array. Home, Portfolio, Links, Contact — and notice Login and Back
+  Office are deliberately not in this list, which is exactly why the secret routes never leak into any
+  menu. [screen: `src/components/Nav.jsx`] Both the desktop top nav and the mobile bottom nav render
+  from that same array, so they can never drift out of sync. Line 19 adds the active-highlight class,
+  and line 20 sets `aria-current="page"` so assistive tech announces which page you're on.
 
-**Footer contact, socials, copyright year.**
-- **UI:** [screen: footer] Email, LinkedIn, GitHub, and a copyright with the current year.
-- **CODE:** [screen: `src/components/Footer.jsx`] Email and socials at lines 5–10; the year is computed
-  at line 14; the copyright line is 52–54.
+**Footer: contact, socials, current-year copyright.**
+- **UI:** [screen: the footer] Email, LinkedIn, GitHub, and a copyright with this year in it.
+- **CODE:** [screen: `src/components/Footer.jsx`] The email and social links are constants at lines 5
+  through 10, and the year isn't hard-coded — line 14 computes it with `new Date().getFullYear()`, so it
+  updates itself. The copyright line is 52 to 54.
 
-**AI logo, click → Home, alt text.**
-- **UI:** [screen: click the logo from another page → returns Home]
-- **CODE:** [screen: `src/components/Logo.jsx`] It's a button with an `aria-label` at line 11 and an
-  `onClick` that navigates home; the tool that generated it is documented in `docs/Research.md`.
+**The AI logo — click returns Home, and it has alt text.**
+- **UI:** [screen: from Portfolio, click the logo → back to Home]
+- **CODE:** [screen: `src/components/Logo.jsx`] It's a real button with an `aria-label` at line 11 and an
+  `onClick` that navigates home, so it works with a keyboard and a screen reader, not just a mouse. The
+  tool that generated the logo is documented in `docs/Research.md`.
 
-**URL stays at root; secret routes not in nav.**
-- **UI:** [screen: click nav items — address bar never changes]
-- **CODE:** [screen: `src/App.jsx` line 37] `navigate` switches state and clears the hash for public
-  views, so the URL stays at root; the secret routes simply aren't in `navItems.js`.
+**Navigation keeps the URL at the root; secret routes are in no nav.**
+- **UI:** [screen: click through the public nav — the address bar never changes]
+- **CODE:** [screen: `src/App.jsx` line 37] This is the `navigate` function. For a public page it just
+  switches a piece of React state and clears any hash with `replaceState`, so the URL stays at the clean
+  root. There's no router library here at all — navigation is state, which is what satisfies the
+  "URL must stay at root" requirement.
 
-**Responsive: desktop top-nav, mobile bottom-nav.**
-- **UI:** [screen: resize to mobile — nav becomes a bottom icon bar; header keeps logo + controls]
+**Responsive: desktop top-nav becomes a mobile bottom bar.**
+- **UI:** [screen: resize the window down to phone width — the nav drops to a fixed row of icons along
+  the bottom, and the header keeps the logo and the controls]
 - **CODE:** [screen: `src/components/Nav.css` line 57] The `@media (max-width: 768px)` block hides the
-  top nav and turns the bottom nav into a fixed icon bar at line 65.
+  top nav and, at line 65, turns the bottom nav into a fixed icon bar. Same component, same data — just
+  restyled by breakpoint.
 
-**Theme + language control slots on every page.**
-- **CODE:** [screen: `Header.jsx` lines 15–18] The theme toggle and language switcher are mounted in
-  the header, so they're reachable everywhere.
+**Theme and language controls, reachable everywhere.**
+- **CODE:** [screen: `Header.jsx` lines 15–18] The theme toggle and the language switcher are mounted in
+  the header, so no matter what page you're on, they're one click away.
 
 ---
 
 ## 3. Home page
 
-**Default view at root.**
-- **UI:** [screen: fresh load → Home]
-- **CODE:** [screen: `App.jsx` line 31] `viewFromHash` defaults to `home`.
+**Home is the default view at the root.**
+- **UI:** [screen: fresh load lands on Home]
+- **CODE:** [screen: `App.jsx` line 31] `viewFromHash` defaults to `home`, so an empty URL renders Home.
 
-**Hero: name, tagline, credential paragraph, CTAs, AI portrait.**
-- **UI:** [screen: hero] Name, role, the italic tagline, the credential paragraph, two CTA buttons, and
-  the portrait.
-- **CODE:** [screen: `src/components/Hero.jsx`] Name at line 15, role and tagline 16–17, the
-  credential paragraph at line 18. The CTAs at 21–26 call `onNavigate` to switch to Portfolio and
-  Contact — no URL change. The AI portrait is at lines 39–45 with real `alt` text.
+**Hero: name, tagline, credential paragraph, CTAs, and the AI portrait.**
+- **UI:** [screen: the hero] The name is the biggest type on the page, then the role, the italic
+  tagline, a short credential paragraph, two call-to-action buttons, and the portrait.
+- **CODE:** [screen: `src/components/Hero.jsx`] Name at line 15, role and tagline at 16 and 17, and the
+  credential paragraph — the "who I am in three breaths" line — at line 18. The two CTAs at lines 21 to
+  26 call `onNavigate` to switch to Portfolio and Contact; again, that's a state switch, so the URL
+  doesn't move. The AI portrait is at lines 39 to 45 with real, descriptive `alt` text.
 
-**"Why I Build" testimony, and it avoids the word "empathy."**
+**"Why I Build" — the testimony, and it avoids the word "empathy."**
 - **UI:** [screen: scroll to Why I Build]
-- **CODE:** [screen: `src/components/WhyIBuild.jsx` lines 22–23] The heading and body come from i18n;
-  the copy is the testimony, and "empathy" is intentionally not in it.
+- **CODE:** [screen: `src/components/WhyIBuild.jsx` lines 22–23] The heading and body come through the
+  translation function, and the copy is deliberately the human-services-to-developer story — the spec
+  says the word "empathy" shouldn't appear in this particular section, and it doesn't.
 
-**Technical skills — at least 3, icon + sentence.**
+**Technical skills — at least three, each an icon plus a full sentence.**
 - **UI:** [screen: the four technical cards]
-- **CODE:** [screen: `src/data/skills.js` lines 3–8] Four skills, each with an icon id and i18n
-  title/description keys; `SkillGrid` and `SkillCard` render them.
+- **CODE:** [screen: `src/data/skills.js` lines 3–8] The skills are data, not markup — four entries, each
+  with an icon id and translation keys for the title and description. The grid renders whatever's in this
+  array, so adding a skill is a one-line change.
 
-**"What I bring to a team" — at least 3.**
-- **UI:** [screen: the four team cards]
-- **CODE:** [screen: `src/data/skills.js` lines 11–16] Resilience, Communication, Accountability,
-  Self-direction.
+**"What I bring to a team" — at least three.**
+- **UI:** [screen: the four team cards — Resilience, Communication, Accountability, Self-direction]
+- **CODE:** [screen: `src/data/skills.js` lines 11–16] Same pattern, second array.
 
-**At least 3 separated sections, no white; 2+ AI images.**
+**Three-plus separated sections, no white surfaces, and two AI images.**
 - **UI:** [screen: scroll the whole page] Hero, Why I Build, and the two skill sections, on alternating
-  warm surfaces — no white anywhere.
-- **CODE / note:** The portrait and the Why-I-Build graphic are the two AI images; both are logged in
-  `docs/Research.md`. Colors come from tokens in `tokens.css`.
+  warm surfaces — there's no white anywhere in the light theme, that's a deliberate brand rule.
+- **CODE / note:** The two AI images are the portrait and the Why-I-Build graphic; both are logged in
+  `docs/Research.md`, and every color comes from the design tokens I'll show at the end.
 
-**Motion: breathing glow, scroll-reveal, reduced-motion.**
-- **UI:** [screen: scroll — cards fade and rise; the glow breathes; then toggle OS "reduce motion" and
-  reload — everything is instantly visible and still]
-- **CODE:** [screen: `src/styles/effects.css`] The glow is at line 10, the scroll-reveal at line 50,
-  and both are wrapped so they stop under reduced motion. [screen: `src/hooks/useReveal.js`] Line 18 is
-  the single `IntersectionObserver`, line 23 unobserves after the first reveal so it only runs once, and
-  line 16 bails out entirely if the user prefers reduced motion.
+**Motion: a breathing glow, scroll-reveal, and full respect for reduced motion.**
+- **UI:** [screen: scroll — cards fade in and rise; the glow behind the portrait breathes. Then turn on
+  the operating system's "reduce motion" setting and reload — now everything is immediately visible and
+  perfectly still.]
+- **CODE:** [screen: `src/styles/effects.css`] The breathing glow is at line 10 and the scroll-reveal at
+  line 50, and both are wrapped so they simply switch off under reduced motion. [screen:
+  `src/hooks/useReveal.js`] The reveal is one shared `IntersectionObserver`, built at line 18 and reused
+  across the whole site. Line 23 stops observing an element after its first reveal, so it animates once
+  and never re-fires. And line 16 bails out entirely for anyone who prefers reduced motion — the
+  accessibility path isn't an afterthought, it's the first check.
 
 ---
 
 ## 4. Portfolio page
 
 **Education, reverse-chronological.**
-- **UI:** [screen: Education section]
-- **CODE:** [screen: `src/pages/Portfolio.jsx` lines 27–38] renders the `EDUCATION` array through
-  `Timeline`/`TimelineEntry`.
+- **UI:** [screen: the Education section, newest first]
+- **CODE:** [screen: `src/pages/Portfolio.jsx` lines 27–38] It maps the `EDUCATION` array through a
+  `Timeline` and `TimelineEntry`, each entry carrying institution, program, and dates.
 
-**Work — combined human-services entry + CodeBoxx coordinator.**
-- **UI:** [screen: Work section — the two entries]
-- **CODE:** [screen: `Portfolio.jsx` lines 40–57] the `WORK` array; human services is one combined
-  entry, plus the coordinator role, with descriptions.
+**Work — human services as one combined entry, plus the CodeBoxx coordinator role.**
+- **UI:** [screen: the Work section — two entries]
+- **CODE:** [screen: `Portfolio.jsx` lines 40–57] The `WORK` array. I combined the human-services roles
+  into a single entry with a real description of responsibilities, and added the current coordinator role
+  on top.
 
-**Projects — 4–5, name/tech/description/image.**
-- **UI:** [screen: the project grid — four cards]
-- **CODE:** [screen: `Portfolio.jsx` line 64] `ProjectGrid` renders the `PROJECTS` array; each card has
-  a name, tech tags, a what-and-why description, and an image — a mix of real screenshots and AI
-  thematic images.
+**Projects — four to five, each with name, tech, description, and image.**
+- **UI:** [screen: the project grid — four cards, each explaining what it is and why it exists]
+- **CODE:** [screen: `Portfolio.jsx` line 64] `ProjectGrid` renders the `PROJECTS` array. Each card has a
+  name, a row of tech tags, a description covering what it does and its purpose, and an image — a mix of
+  real screenshots and AI thematic images.
 
-**Résumé PDF download.**
-- **UI:** [screen: click "Download résumé" → the PDF opens/downloads]
-- **CODE:** [screen: `src/components/ResumeDownload.jsx` lines 22–31] a real anchor to `/resume.pdf`
-  with the `download` attribute.
+**The résumé PDF download.**
+- **UI:** [screen: click "Download résumé" — the PDF downloads] This was flagged as a commonly-missed
+  item, so I made it obvious, right next to the page heading.
+- **CODE:** [screen: `src/components/ResumeDownload.jsx` lines 22–31] It's a real anchor pointing at
+  `/resume.pdf` with the `download` attribute, so the browser downloads it rather than navigating away.
 
-**AI images + reveal motion.**
-- **UI/note:** [screen: scroll — entries reveal] The AI thematic project images are logged in
-  `Research.md`; motion reuses the same `Reveal` component from Home.
+**AI images and reveal motion.**
+- **UI / note:** [screen: scroll — the entries reveal] The AI thematic project images are logged in
+  `Research.md`, and the motion reuses the exact same `Reveal` component from Home — one pattern, whole
+  site.
 
 ---
 
 ## 5. Links page
 
-**At least 3 cards: image, title, description, new-tab URL.**
-- **UI:** [screen: Links grid; click a card → opens in a new tab, site stays open behind it]
-- **CODE:** [screen: `src/data/links.js`] Five links. [screen: `src/components/LinkCard.jsx` lines
-  19–24] Each is an anchor with `target="_blank"` **and** `rel="noopener noreferrer"` at line 23 —
-  that's the security detail so a `_blank` link can't touch `window.opener`.
+**At least three cards — image, title, description, and a new-tab URL.**
+- **UI:** [screen: the Links grid; click a card — it opens in a new tab and my site stays open behind it]
+- **CODE:** [screen: `src/data/links.js`] Five curated links. [screen: `src/components/LinkCard.jsx` lines
+  19–24] Each card is an anchor that opens in a new tab, and — this is a real security detail — line 23
+  sets `rel="noopener noreferrer"`. Without `noopener`, a page you open with `target="_blank"` can reach
+  back into your window through `window.opener`; this closes that hole.
 
 **LinkedIn and GitHub with the correct URLs.**
-- **CODE:** [screen: `src/data/links.js` line 15] LinkedIn is `/in/rainadejute`; [line 31] GitHub is
-  `/rdejute`.
+- **CODE:** [screen: `src/data/links.js` line 15] LinkedIn is slash-in-slash-rainadejute; [line 31]
+  GitHub is slash-rdejute.
 
-**At least 1 AI image.**
-- **Note:** The card banners are AI-generated; logged in `Research.md`.
+**At least one AI image.**
+- **Note:** The card banners are AI-generated and logged in `Research.md`.
 
 ---
 
-## 6. Contact page
+## 6. Contact page — the first feature that really exercises Supabase
 
-**Fields with labels: name, email (`type="email"`), message (textarea).**
+**Fields with visible labels: name, email typed as email, and a message textarea.**
 - **UI:** [screen: the form]
-- **CODE:** [screen: `src/components/ContactForm.jsx` lines 65–92] Three `FormField`s. [screen:
-  `src/components/FormField.jsx` line 46] Every field's `<label>` is tied to its input with
-  `htmlFor`/`id`.
+- **CODE:** [screen: `src/components/ContactForm.jsx` lines 65–92] Three form fields. [screen:
+  `src/components/FormField.jsx` line 46] Every field has a real `<label>` tied to its input with
+  `htmlFor` and `id` — placeholders alone aren't accessible, so this matters.
 
-**Validation: all required, valid email, visible errors, blocked submit.**
-- **UI:** [screen: submit empty → errors appear; type a bad email → email error; nothing sends]
-- **CODE:** [screen: `ContactForm.jsx` lines 27–33] `validate` checks all three fields; the email regex
-  is at line 7. Line 42 stops the submit if there are any errors. Errors are linked to inputs via
-  `aria-describedby` [screen: `FormField.jsx` line 41].
+**Validation — all required, a real email check, visible errors, and a blocked submit.**
+- **UI:** [screen: hit submit empty — inline errors appear on every field; type a broken email — the
+  email error shows; nothing gets sent]
+- **CODE:** [screen: `ContactForm.jsx` lines 27–33] The `validate` function checks all three fields are
+  filled and that the email matches the pattern at line 7. Then line 42 is the gate: if there are any
+  errors, it returns early and never touches Supabase. And each error is linked back to its input with
+  `aria-describedby` [screen: `FormField.jsx` line 41], so a screen reader reads the error with the
+  field.
 
-**Insert into Supabase via the shared client.**
-- **UI:** [screen: fill it in correctly, submit → the send button sweeps, then the success receipt
-  rises]
-- **CODE:** [screen: `ContactForm.jsx` lines 46–50] `supabase.from('messages').insert(...)` using the
-  single client — respecting the public-insert RLS policy.
+**Submission — an insert into `messages` through the shared client.**
+- **UI:** [screen: fill it in correctly and submit — the send button sweeps, then a success message rises]
+- **CODE:** [screen: `ContactForm.jsx` lines 46–50] This is the actual write:
+  `supabase.from('messages').insert` with the name, email, and message. It uses the single shared client,
+  and it only works because of that public-insert RLS policy from earlier — this is that policy in action.
 
-**Success/failure feedback, reset, auto-dismiss, pending state, aria-live.**
-- **UI:** [screen: success message; fields cleared; it disappears after a few seconds. Then, if I can
-  force a failure, the red error]
-- **CODE:** [screen: `ContactForm.jsx`] On success, line 56 sets the success state, line 57 clears the
-  fields, and lines 58–59 start the auto-dismiss timer. The failure banner is lines 97–104, the pending
-  "Sending…" button is 107–113, and the whole feedback area is inside an `aria-live` region at line 96.
-- **CODE (fallback):** line 38 — if Supabase isn't configured, submit is a no-op and line 94 shows a
-  friendly disabled note instead of crashing.
-
-**Verify end-to-end:** [screen: Supabase dashboard → the new row appears in `messages`].
-
----
-
-## 7. Login (secret route)
-
-**Not in any nav; reachable by typed hash and by Konami Code.**
-- **UI:** [screen: point out it's not in header/footer/mobile nav; type `#login` → it appears; then from
-  Home press ↑ ↑ ↓ ↓ ← → ← → B A → it appears]
-- **CODE:** [screen: `App.jsx` line 28] `#login` maps to the login view. [screen:
-  `src/hooks/useKonamiCode.js` line 4] the sequence; line 29 ignores keystrokes while typing; line 40
-  resets on a wrong key.
-
-**Email, password, submit → `signInWithPassword`.**
-- **UI:** [screen: enter admin credentials → land on Back Office]
-- **CODE:** [screen: `src/pages/Login.jsx`] fields at lines 43–61, submit at 74. [screen:
-  `src/context/AuthContext.jsx` line 34] the submit calls `supabase.auth.signInWithPassword`.
-
-**Failure error; success → Back Office; session persists.**
-- **UI:** [screen: wrong password → red error and a gentle shake; then log in correctly; refresh the
-  page → still logged in, still on Back Office]
-- **CODE:** [screen: `Login.jsx` lines 26–33] failure sets the error, success navigates to backoffice.
-  [screen: `AuthContext.jsx` line 16] on load `getSession` reads the persisted session, so a refresh
-  keeps me in and routes me to the Back Office.
+**Feedback — distinct success and failure, field reset, auto-dismiss, a pending state, and an aria-live
+region.**
+- **UI:** [screen: the success state; the fields have cleared; it fades out after a few seconds. If I can
+  force a failure, the distinct red error appears and keeps my text so I can retry.]
+- **CODE:** [screen: `ContactForm.jsx`] On success, line 56 flips to the success state, line 57 clears the
+  fields, and lines 58 and 59 start the auto-dismiss timer. The red failure banner is lines 97 to 104 —
+  and notice on failure I *keep* the field values so the person doesn't lose what they typed. The button
+  shows a disabled "Sending…" state at lines 107 to 113 to prevent a double-submit. And the whole
+  feedback area sits inside an `aria-live` region at line 96, so the result is announced, not just shown.
+- **CODE (the fallback):** line 38 — if Supabase isn't configured, the submit is a safe no-op, and line
+  94 shows a friendly note instead of throwing.
+- **End-to-end proof:** [screen: Supabase dashboard — the new row I just submitted is sitting in the
+  `messages` table].
 
 ---
 
-## 8. Back Office (auth-gated)
+## 7. Login — the secret route
 
-**Auth gate before render.**
-- **UI:** [screen: log out, then type `#backoffice` → redirected to login]
-- **CODE:** [screen: `App.jsx` lines 72–73] if the view is backoffice and there's no session, it
-  renders login instead — and a loading view while the session is still resolving.
+**It's in no navigation, and it's reachable two sanctioned ways: a typed hash and the Konami Code.**
+- **UI:** [screen: point out it's absent from the header, footer, and mobile nav. Type `#login` in the
+  address bar — the login view appears. Then from anywhere, press up up down down left right left right B
+  A — and it appears again.]
+- **CODE:** [screen: `App.jsx` line 28] A small lookup table maps the hash `#login` to the login view — so
+  it's typeable and deep-linkable even on a static host. [screen: `src/hooks/useKonamiCode.js`] The
+  Konami sequence is a single array at line 4 so it's easy to change. The listener at line 26 walks the
+  sequence key by key. Two details I'm proud of: line 29 ignores keystrokes while you're typing in a form
+  — so typing an "a" in a message box can't trip it — and line 40 resets on a wrong key, but it's smart
+  enough to let that key *start* a fresh sequence. There's even a friendly console hint at line 51 so an
+  evaluator poking in dev tools discovers the easter egg.
 
-**Fetch all messages, newest first; loading/empty/error states.**
-- **UI:** [screen: the table; mention the skeleton on load and the empty/error states]
-- **CODE:** [screen: `src/pages/BackOffice.jsx` lines 23–26] `select('*').order('created_at',
-  { ascending: false })`; the loading, error, and empty branches are lines 76–107.
+**Email, password, and a submit that calls `signInWithPassword`.**
+- **UI:** [screen: type the admin email and password, submit — and I land in the Back Office]
+- **CODE:** [screen: `src/pages/Login.jsx`] The fields are at lines 43 to 61 and the submit button at 74.
+  [screen: `src/context/AuthContext.jsx` line 34] The submit calls
+  `supabase.auth.signInWithPassword` — there's no registration path anywhere; the admin account is
+  pre-created in Supabase.
 
-**Table columns Name / Email / Date / Actions.**
-- **CODE:** [screen: `src/components/MessagesTable.jsx` lines 12–17] the four headers; the date is
-  formatted with `toLocaleDateString` at line 28.
+**Distinct failure, success routes to Back Office, and the session persists.**
+- **UI:** [screen: type a wrong password — a distinct red error and a gentle shake. Then log in for real,
+  land on the Back Office, and hit browser refresh — I'm still logged in and still on the Back Office.]
+- **CODE:** [screen: `Login.jsx` lines 26–33] A failure sets the error; a success navigates to backoffice.
+  [screen: `AuthContext.jsx` line 16] On load, `getSession` reads the session Supabase already persisted
+  in local storage, which is why a refresh doesn't log me out — and combined with the redirect logic, an
+  existing session drops me straight into the Back Office.
+
+---
+
+## 8. Back Office — auth-gated admin
+
+**The auth gate runs before any content renders.**
+- **UI:** [screen: log out, then type `#backoffice` directly — I'm bounced to the login screen]
+- **CODE:** [screen: `src/App.jsx` lines 72–73] This is the guard: if the requested view is backoffice
+  and there's no session, it renders login instead. And while the session is still being checked, it
+  shows a neutral loading view — that avoids flashing the login screen for a frame before the session
+  resolves, because remember, the session starts out unknown and has to be fetched asynchronously.
+
+**Fetch every message, newest first, with real loading, empty, and error states.**
+- **UI:** [screen: the table; mention the warm skeleton while it loads, and that there are distinct empty
+  and error states]
+- **CODE:** [screen: `src/pages/BackOffice.jsx` lines 23–26] The query is
+  `select('*').order('created_at', ascending false)` — all rows, newest first. The loading, error, and
+  empty branches are all handled explicitly at lines 76 through 107, so it's never a blank screen.
+
+**Table columns: Name, Email, Date, Actions.**
+- **CODE:** [screen: `src/components/MessagesTable.jsx` lines 12–17] The four column headers, and the date
+  is rendered in a readable local format with `toLocaleDateString` at line 28.
 
 **Delete removes the row instantly.**
-- **UI:** [screen: click the trash icon → the row disappears without a refresh]
-- **CODE:** [screen: `BackOffice.jsx` lines 40–53] it deletes in Supabase at line 42, then removes the
-  row from local state so the table updates immediately.
+- **UI:** [screen: click the trash icon on a row — it's gone, no page refresh]
+- **CODE:** [screen: `BackOffice.jsx` lines 40–53] It deletes in Supabase at line 42, and then removes
+  that row from local state, so the table updates immediately without a reload. That instant update is an
+  explicit requirement.
 
-**View modal: name, email, date+time, full text; close via X, outside click, Escape.**
-- **UI:** [screen: click View → modal; press Escape, click outside, click X]
-- **CODE:** [screen: `src/components/MessageModal.jsx`] Escape closes at line 21, the backdrop click
-  closes at line 50, and lines 25–37 trap focus inside the dialog, with focus returned to the trigger
-  at line 43.
+**The view modal: full details, and it closes three ways.**
+- **UI:** [screen: click View — a modal opens with the sender's name, email, the date and time, and the
+  full message. Press Escape — it closes. Reopen, click outside — closes. Reopen, click the X — closes.]
+- **CODE:** [screen: `src/components/MessageModal.jsx`] Escape closes at line 21, a click on the backdrop
+  closes at line 50, and lines 25 to 37 trap focus inside the dialog so tabbing can't wander out behind
+  it — and when it closes, line 43 returns focus to the button that opened it. That focus handling is
+  what makes a modal actually accessible rather than just visually on top.
 
 **Logout.**
-- **UI:** [screen: click Log out → back to Home, session cleared]
-- **CODE:** [screen: `BackOffice.jsx` lines 55–58] calls `signOut` then navigates home.
+- **UI:** [screen: click Log out — I'm returned Home and the session is cleared; typing `#backoffice`
+  again now bounces me to login]
+- **CODE:** [screen: `BackOffice.jsx` lines 55–58] It calls `signOut` and then navigates home.
 
 ---
 
-## 9. Extra mile — Light/Dark theme
+## 9. Extra mile — Light / Dark theme
 
-**Token-driven, both themes, animated toggle.**
-- **UI:** [screen: click the toggle — the palette wipes across from the button; every color changes]
-- **CODE:** [screen: `src/styles/tokens.css`] light theme at line 5, dark at line 56 — same variable
-  names, so one attribute flip re-skins everything. [screen: `src/context/ThemeContext.jsx` line 13]
-  applies `data-theme`; lines 34–43 are the View Transitions radial wipe, with an instant-swap fallback
-  at line 21 for reduced motion.
-- **⚠️ Must say honestly:** right now the theme **defaults to light and is not persisted, and it does
-  not read your operating-system preference.** `ThemeContext.jsx` line 11 hard-codes the starting theme
-  to light. The spec mentions OS-default and localStorage persistence, but that part is **not built
-  yet** — so I won't claim it. The toggle itself fully works; remembering your choice across reloads is
-  a to-do.
-
----
-
-## 10. Extra mile — Languages (EN/FR)
-
-**Switcher, both JSON files, no hardcoded strings.**
-- **UI:** [screen: click the EN/FR switcher — the whole site switches language]
-- **CODE:** [screen: `src/components/LanguageSwitcher.jsx` lines 6–22] toggles the language. [screen:
-  `src/context/LanguageContext.jsx` lines 15–16] the `t()` function resolves a dotted key like
-  `nav.home` out of the active dictionary. [screen: `src/i18n/en.json` and `fr.json`] every string
-  lives in both files.
-- **⚠️ Must say honestly:** like the theme, the language choice is **not persisted across reloads** —
-  `LanguageContext.jsx` line 11 always starts in English. The switching works live; remembering it is a
-  to-do.
+**Token-driven, both themes, with an animated toggle.**
+- **UI:** [screen: click the theme toggle — the new palette wipes across the screen in a circle from the
+  button, and every color on the page changes at once]
+- **CODE:** [screen: `src/styles/tokens.css`] Here's the engine. The light theme is defined at line 5, the
+  dark theme at line 56 — the exact same variable names, different values. My components never write a
+  raw color; they reference these tokens. So flipping one attribute, `data-theme` on the html element,
+  re-skins the entire site. [screen: `src/context/ThemeContext.jsx` line 13] That flip happens here. And
+  lines 34 to 43 are the animation — it uses the browser's View Transitions API to grow a circle of the
+  new theme out from exactly where I clicked. The tricky part is line 34's `flushSync`: React normally
+  applies state changes asynchronously, but the View Transitions API needs the DOM already updated inside
+  its callback so it can capture the "after" snapshot, so `flushSync` forces the theme change to happen
+  synchronously right then. And line 21 is the graceful fallback — if the browser doesn't support the API,
+  or you prefer reduced motion, it just swaps instantly with no animation.
+- **⚠️ Honest callout:** right now the theme **defaults to light, it does not read your operating-system
+  preference, and it does not persist across reloads.** [screen: `ThemeContext.jsx` line 11] The starting
+  theme is hard-coded to light here. The spec mentions an OS default and saving your choice — that part
+  isn't built yet, so I'm not going to claim it. The toggle fully works; remembering the choice is on my
+  to-do list.
 
 ---
 
-## Cross-cutting (Definition of Done)
+## 10. Extra mile — Languages (English / French)
 
-- **UI:** [screen: quickly toggle theme and language on a couple of pages] Everything works in both
-  themes and both languages. Tab through the nav and the form to show keyboard focus rings. Images have
-  alt text; the console is clean apart from the intentional Konami hint.
+**A switcher, both JSON dictionaries, and no hard-coded strings.**
+- **UI:** [screen: click the EN/FR switcher — the entire site, every label and paragraph, switches
+  language]
+- **CODE:** [screen: `src/components/LanguageSwitcher.jsx` lines 6–22] The switcher just flips the active
+  language. [screen: `src/context/LanguageContext.jsx` lines 15–16] This is the translation function,
+  `t` — you give it a dotted key like `nav.home` and it walks the active dictionary to find the string.
+  [screen: `src/i18n/en.json` and `fr.json`] Every user-facing string lives in both files — nothing is
+  hard-coded in a component, which is exactly what makes a second language possible at all.
+- **⚠️ Honest callout:** like the theme, the language choice **does not persist across a reload** —
+  [screen: `LanguageContext.jsx` line 11] it always starts in English. The live switching works; saving
+  the preference is a to-do.
+
+---
+
+## Cross-cutting — Definition of Done
+
+- **UI:** [screen: on a couple of pages, quickly toggle theme and language together] Everything works in
+  both themes and both languages. [screen: tab through the nav and a form] Keyboard focus is visible on
+  every interactive element. Images have alt text, and the console is clean apart from the intentional
+  Konami hint.
 
 ---
 
 ## Things I'm calling out rather than pretending
 
-- **Repo name, public status, collaborators, branch flow, Pages source** — verified on GitHub, not in
-  the running app.
-- **Auth enabled, admin user, and "public cannot read messages"** — shown in the Supabase dashboard;
-  the RLS policies are the proof.
-- **Theme:** works and animates, but does **not** yet default from the OS or persist. (`ThemeContext.jsx:11`)
-- **Language:** switches live, but does **not** yet persist across reloads. (`LanguageContext.jsx:11`)
-- **AI-tool documentation:** `docs/Research.md` names the tool for most images, but a few link banners
-  and project graphics still say "confirm," and the code comments in `Hero.jsx` and `Logo.jsx` still
-  have a "<DOCUMENT THE TOOL>" placeholder. I need to finish that before this is truly done — it's a
-  graded item.
+- **Auth enabled, the admin user, and "the public cannot read messages"** — those are verified in the
+  Supabase dashboard, and the RLS policies in `schema.sql` are the proof.
+- **Theme** — it works and it animates, but it does **not** yet default from the OS or persist.
+  (`ThemeContext.jsx:11`)
+- **Language** — it switches live, but does **not** yet persist across reloads. (`LanguageContext.jsx:11`)
+- **AI-tool documentation** — `docs/Research.md` names the tool for most images, but a few Links banners
+  and project graphics still say "confirm," and the comments in `Hero.jsx` and `Logo.jsx` still have a
+  "document the tool" placeholder. That's a graded item and I need to finish it.
 
 ---
 
 ## Closing line
 
-That's the full walkthrough — every requirement, on screen and in the code, plus an honest note on the
-few things still on my to-do list. Thanks for watching; the site is live at rdejute dot github dot io.
+That's the full walkthrough — every requirement, shown on screen and then in the code that makes it work,
+plus an honest note on the few things still on my list. The site is live at rdejute dot github dot io.
+Thanks for watching.
