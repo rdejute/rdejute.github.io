@@ -13,6 +13,11 @@
   opacity: 0;
 }
 
+/* Allow pointer events to pass through while the preloader is fading out */
+.preloader--leaving {
+  pointer-events: none;
+}
+
 .preloader__mark {
   overflow: visible;
 }

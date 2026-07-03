@@ -4,8 +4,12 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
   gap: calc(var(--space) * 4);
-  align-items: stretch; /* image matches the form's height */
-  margin-top: calc(var(--space) * 3);
+  align-items: stretch; /* image spans the heading + form together */
+}
+
+/* Heading and form stacked; the head's own margin-bottom spaces them. */
+.contact-layout__main {
+  min-width: 0;
 }
 
 .contact-layout__media {
