@@ -13,6 +13,7 @@
 }
 
 .field__control {
+  width: 100%;
   font: inherit;
   color: var(--text);
   background: var(--surface);
@@ -22,12 +23,91 @@
   transition: border-color 0.15s ease;
 }
 
+/* Password field with a reveal toggle. */
+.field__control-wrap {
+  position: relative;
+}
+
+.field__control--revealable {
+  padding-right: calc(var(--space) * 5.5);
+}
+
+.field__reveal {
+  position: absolute;
+  right: calc(var(--space) * 0.75);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+  transition: color 0.15s ease;
+}
+
+.field__reveal:hover {
+  color: var(--accent-cool);
+}
+
+.field__reveal-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+/* Eye toggles with a quick squash — a small morph as it swaps open/closed. */
+.field__reveal:active .field__reveal-icon {
+  transform: scale(0.78);
+}
+
 .field__control::placeholder {
   color: var(--text-muted);
 }
 
+/* Focus "care glow": only the field you're in is lit — a soft sage bloom. */
 .field__control:focus {
   border-color: var(--accent-cool);
+  box-shadow: 0 0 0 4px var(--accent-cool-tint);
+}
+
+/* ---- Floating label variant (Contact) ---- */
+.field--float .field__floatwrap {
+  position: relative;
+}
+
+.field--float .field__label {
+  position: absolute;
+  left: calc(var(--space) * 1.5);
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0 calc(var(--space) * 0.5);
+  background: var(--surface);
+  color: var(--text-muted);
+  pointer-events: none;
+  transform-origin: left center;
+  transition:
+    top var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+/* Textarea rests its label near the top rather than vertically centered. */
+.field--float textarea.field__control ~ .field__label {
+  top: calc(var(--space) * 1.5);
+  transform: none;
+}
+
+/* Floated state: focused, or holding a value. */
+.field--float .field__control:focus ~ .field__label,
+.field--float .field__control:not(:placeholder-shown) ~ .field__label {
+  top: 0;
+  transform: translateY(-50%) scale(0.82);
+  color: var(--accent-cool-deep);
 }
 
 textarea.field__control {

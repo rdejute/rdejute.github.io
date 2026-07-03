@@ -1,0 +1,117 @@
+.messages-table__wrap {
+  overflow-x: auto; /* stays usable on small screens */
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.messages-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.messages-table th,
+.messages-table td {
+  padding: calc(var(--space) * 1.5) calc(var(--space) * 2);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.messages-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.messages-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.messages-table tbody tr:hover {
+  background: var(--surface-alt);
+}
+
+/* Rows fade in with a gentle stagger (opacity only — reliable on <tr>). */
+@media (prefers-reduced-motion: no-preference) {
+  .messages-table__row {
+    animation: row-in var(--dur) var(--ease-out) both;
+    animation-delay: var(--row-delay, 0ms);
+  }
+  @keyframes row-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* The newest message gets a single sage wash to draw the eye. */
+  .messages-table__row.is-newest {
+    animation:
+      row-in var(--dur) var(--ease-out) both,
+      row-newest 2.2s var(--ease-out) 1;
+  }
+  @keyframes row-newest {
+    0%   { background: var(--accent-cool-tint); }
+    100% { background: transparent; }
+  }
+}
+
+/* Delete: the row fades out before it's dropped from the list. */
+.messages-table__row.is-removing {
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.messages-table__email {
+  color: var(--text-muted);
+}
+
+.messages-table__actions-col {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.messages-table__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+/* Small button + destructive icon button. */
+.btn--sm {
+  padding: calc(var(--space) * 0.5) calc(var(--space) * 1.25);
+  font-size: 0.8rem;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.icon-btn__glyph {
+  width: 18px;
+  height: 18px;
+}
+
+/* Clear destructive cue: terracotta on hover/focus. */
+.icon-btn--danger:hover,
+.icon-btn--danger:focus-visible {
+  color: var(--accent-warm);
+  border-color: var(--accent-warm);
+  background: color-mix(in srgb, var(--accent-warm) 12%, transparent);
+}
+
+.icon-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

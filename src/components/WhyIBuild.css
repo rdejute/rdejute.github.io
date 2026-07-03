@@ -1,8 +1,31 @@
 .why__inner {
+  position: relative;
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: calc(var(--space) * 4);
   align-items: center;
+}
+
+/* The throughline: a faint sage track whose fill is drawn by scroll (--fill,
+   set by useScrollFill). Threads the human-services past into the code present. */
+.why__thread {
+  position: absolute;
+  left: calc(var(--space) * -2);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent-cool) 20%, transparent);
+  overflow: hidden;
+}
+
+.why__thread::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-cool);
+  transform-origin: top;
+  transform: scaleY(var(--fill, 0));
 }
 
 .why__text h2 {

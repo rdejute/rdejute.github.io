@@ -64,8 +64,8 @@ export default function ContactForm() {
     <form className="contact-form" onSubmit={handleSubmit} noValidate>
       <FormField
         id="cf-name"
+        float
         label={t('contact.name.label')}
-        placeholder={t('contact.name.placeholder')}
         value={values.name}
         onChange={update('name')}
         error={errors.name}
@@ -74,8 +74,8 @@ export default function ContactForm() {
       <FormField
         id="cf-email"
         type="email"
+        float
         label={t('contact.email.label')}
-        placeholder={t('contact.email.placeholder')}
         value={values.email}
         onChange={update('email')}
         error={errors.email}
@@ -84,8 +84,8 @@ export default function ContactForm() {
       <FormField
         id="cf-message"
         as="textarea"
+        float
         label={t('contact.message.label')}
-        placeholder={t('contact.message.placeholder')}
         value={values.message}
         onChange={update('message')}
         error={errors.message}
@@ -94,14 +94,6 @@ export default function ContactForm() {
       {!isSupabaseConfigured && <p className="form-note">{t('contact.unavailable')}</p>}
 
       <div aria-live="polite">
-        {status === 'success' && (
-          <div className="form-status form-status--success" role="status">
-            <svg className="form-status__icon" aria-hidden="true">
-              <use href="/icons.svg#check-icon" />
-            </svg>
-            <span>{t('contact.feedback.success')}</span>
-          </div>
-        )}
         {status === 'error' && (
           <div className="form-status form-status--error" role="alert">
             <svg className="form-status__icon" aria-hidden="true">
@@ -112,9 +104,24 @@ export default function ContactForm() {
         )}
       </div>
 
-      <button type="submit" className="btn btn--primary" disabled={submitting || !isSupabaseConfigured}>
+      <button
+        type="submit"
+        className={`btn btn--primary contact-form__submit${submitting ? ' is-sending' : ''}`}
+        disabled={submitting || !isSupabaseConfigured}
+      >
         {submitting ? t('contact.sending') : t('contact.submit')}
       </button>
+
+      {/* The room answers: a rising receipt with a single sage bloom. */}
+      {status === 'success' && (
+        <div className="contact-form__receipt" role="status">
+          <span className="contact-form__bloom" aria-hidden="true" />
+          <svg className="contact-form__receipt-icon" aria-hidden="true">
+            <use href="/icons.svg#check-icon" />
+          </svg>
+          <p className="contact-form__receipt-text">{t('contact.feedback.success')}</p>
+        </div>
+      )}
     </form>
   )
 }

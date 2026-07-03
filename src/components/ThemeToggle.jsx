@@ -12,7 +12,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       className="control"
-      onClick={toggleTheme}
+      onClick={(e) => toggleTheme(e)}
       aria-label={t('controls.theme')}
       aria-pressed={isDark}
       title={t('controls.theme')}

@@ -6,14 +6,30 @@
 /* Alternating surface band for visual separation (no white — warm browns). */
 .home-section--alt {
   background: var(--surface-alt);
-  border-top: none;
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
   padding: calc(var(--space) * 5) calc(var(--space) * 4);
   margin: calc(var(--space) * 2) 0;
 }
 
 .home-section__head {
   margin-bottom: calc(var(--space) * 4);
+}
+
+/* Quiet mono section number — makes the page feel authored, Linear-style. */
+.home-section__index {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--accent-cool-deep);
+  margin-bottom: calc(var(--space) * 1.25);
+}
+
+.home-section__index::before {
+  content: "— ";
+  color: var(--text-muted);
 }
 
 .home-section__head h2 {

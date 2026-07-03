@@ -8,22 +8,28 @@
   flex-direction: column;
   gap: calc(var(--space) * 1.5);
   height: 100%;
-  transition: box-shadow 0.25s ease;
+  transition:
+    box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
 }
 
-/* Glow-intensity increase on hover (a sage bloom shadow; not motion). */
+/* Warm ambient lift + sage bloom, and the hairline border warms to sage. */
 .skill-card:hover {
-  box-shadow: 0 8px 26px -12px var(--accent-cool);
+  box-shadow: var(--shadow-focal);
+  border-color: color-mix(in srgb, var(--accent-cool) 40%, var(--border));
 }
 
-/* Gentle hover lift — motion, so only when motion is welcome. */
+/* Gentle spring lift — motion, so only when motion is welcome. */
 @media (prefers-reduced-motion: no-preference) {
   .skill-card {
-    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    transition:
+      transform var(--dur) var(--ease-spring),
+      box-shadow var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
   }
 
   .skill-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
   }
 }
 
@@ -36,6 +42,14 @@
   border-radius: var(--radius-md);
   background: var(--accent-cool-tint);
   color: var(--accent-cool);
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+/* The icon leans in a touch as the card lifts. */
+@media (prefers-reduced-motion: no-preference) {
+  .skill-card:hover .skill-card__icon {
+    transform: scale(1.08) rotate(-3deg);
+  }
 }
 
 .skill-card__glyph {

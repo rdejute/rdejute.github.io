@@ -1,6 +1,7 @@
 import ContactForm from '../components/ContactForm'
 import Reveal from '../components/Reveal'
 import { useLanguage } from '../context/LanguageContext'
+import './Contact.css'
 
 // Contact page: intro + the validated form that inserts into Supabase.
 export default function Contact() {
@@ -10,6 +11,10 @@ export default function Contact() {
       <Reveal as="header" className="home-section__head">
         <h1 id="contact-heading">{t('contact.heading')}</h1>
         <p className="home-section__intro">{t('contact.intro')}</p>
+        <p className="contact-badge">
+          <span className="contact-badge__dot" aria-hidden="true" />
+          {t('contact.replyBadge')}
+        </p>
       </Reveal>
       <Reveal>
         <ContactForm />

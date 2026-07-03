@@ -1,0 +1,29 @@
+/* Small human touch under the intro: a live "presence" badge. */
+.contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.75);
+  margin: calc(var(--space) * 1.5) 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--accent-cool-deep);
+}
+
+.contact-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cool);
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-badge__dot {
+    animation: presence-pulse 2.4s var(--ease-in-out) infinite;
+  }
+  @keyframes presence-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--accent-cool-tint); }
+    50%      { box-shadow: 0 0 0 5px transparent; }
+  }
+}

@@ -1,5 +1,6 @@
 /* Field + status styles live in FormField.css (shared). Contact-only bits here. */
 .contact-form {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: calc(var(--space) * 2.5);
@@ -14,4 +15,104 @@
 
 .contact-form .btn {
   align-self: flex-start;
+}
+
+/* ---- Send button: a light sweep travels across while the message is carried ---- */
+.contact-form__submit {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form__submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--surface) 45%, transparent),
+    transparent
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-form__submit.is-sending::before {
+    animation: send-sweep 1s linear infinite;
+  }
+  @keyframes send-sweep {
+    to { transform: translateX(100%); }
+  }
+}
+
+/* ---- Receipt: the form's warm confirmation, rising with a sage bloom ---- */
+.contact-form__receipt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--space) * 1.5);
+  text-align: center;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-lg);
+  z-index: 4;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-form__receipt {
+    animation: receipt-rise var(--dur-slow) var(--ease-out) both;
+  }
+  @keyframes receipt-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+.contact-form__receipt-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--accent-cool-deep);
+  z-index: 1;
+}
+
+.contact-form__receipt-text {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text);
+  z-index: 1;
+}
+
+/* The single bloom behind the check. */
+.contact-form__bloom {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 12rem;
+  height: 12rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-cool) 45%, transparent),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-form__bloom {
+    animation: bloom-once 1.2s var(--ease-out) both;
+  }
+  @keyframes bloom-once {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+    40%  { opacity: 0.9; }
+    100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  }
 }
