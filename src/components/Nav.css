@@ -1,0 +1,90 @@
+.nav__list {
+  display: flex;
+  align-items: center;
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.75);
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  padding: calc(var(--space) * 0.75) calc(var(--space) * 1.5);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  background-image: none;               /* opt out of the inline-link underline */
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.nav__link:hover {
+  color: var(--text);
+  background: var(--accent-cool-tint);
+  text-decoration: none;
+}
+
+/* Active page → sage pill (interactive accent). */
+.nav__link--active {
+  color: var(--text);
+  background: var(--accent-cool-tint);
+  box-shadow: inset 0 0 0 1px var(--accent-cool);
+}
+
+.nav__icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---- Desktop top nav: horizontal text links, icons hidden ---- */
+.nav--top .nav__list {
+  gap: calc(var(--space) * 0.5);
+}
+
+.nav--top .nav__icon {
+  display: none;
+}
+
+/* ---- Mobile bottom nav: fixed icon bar with labels under icons ---- */
+.nav--bottom {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* The header keeps logo + controls; nav links move to the bottom bar. */
+  .nav--top {
+    display: none;
+  }
+
+  .nav--bottom {
+    display: block;
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 100;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: calc(var(--space) * 0.5) 0 calc(var(--space) * 0.75);
+  }
+
+  .nav--bottom .nav__list {
+    justify-content: space-around;
+  }
+
+  .nav--bottom .nav__link {
+    flex-direction: column;
+    gap: 2px;
+    padding: calc(var(--space) * 0.5) var(--space);
+    border-radius: var(--radius-md);
+    font-size: 0.7rem;
+  }
+
+  .nav--bottom .nav__link--active {
+    box-shadow: none;
+    color: var(--accent-cool-deep);
+    background: transparent;
+  }
+}

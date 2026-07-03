@@ -1,0 +1,10 @@
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: calc(var(--space) * 2.5);
+}
+
+/* Reveal wrapper is the grid item; let the card fill its height. */
+.skill-grid__cell {
+  height: 100%;
+}

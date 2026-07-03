@@ -38,6 +38,9 @@ jobs:
         # VITE_* values are injected at build time from repo secrets.
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          # Client reads PUBLISHABLE first, then falls back to ANON — set whichever
+          # matching secret you have; both are forwarded here.
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Upload Pages artifact

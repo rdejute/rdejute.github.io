@@ -1,0 +1,84 @@
+/* Ambient motion utilities: a breathing sage glow and scroll-reveal.
+   All movement is gated behind prefers-reduced-motion: no-preference. Under
+   `reduce`, glows are static and revealed content shows immediately. */
+
+/* ---- Breathing sage glow (soft radial bloom, never a hard ring) ---- */
+.glow {
+  position: relative;
+}
+
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  z-index: -1;
+  border-radius: inherit;
+  /* Strong sage core fading across the full radius; the blur pushes a soft
+     halo out past the element's edges (where it stays visible around opaque
+     cards / the portrait, instead of fading out before it gets there). */
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent-cool) 55%, transparent),
+    transparent
+  );
+  filter: blur(24px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glow::before {
+    animation: glow-breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes glow-breathe {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.97);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.04);
+    }
+  }
+}
+
+/* ---- Scroll-reveal (fade-rise-and-focus; .is-visible toggled by useReveal) ----
+   Content rises, fades in, and resolves from a hair of blur — the expo-out curve
+   makes it arrive fast then settle, the way premium sites feel. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(6px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out),
+    filter var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Stagger children of a revealing group by declaring --reveal-delay per index.
+   Add class .reveal--stagger to a parent whose direct .reveal children should
+   cascade in (e.g. a card grid). */
+.reveal--stagger > .reveal:nth-child(1) { --reveal-delay: 0ms; }
+.reveal--stagger > .reveal:nth-child(2) { --reveal-delay: 70ms; }
+.reveal--stagger > .reveal:nth-child(3) { --reveal-delay: 140ms; }
+.reveal--stagger > .reveal:nth-child(4) { --reveal-delay: 210ms; }
+.reveal--stagger > .reveal:nth-child(5) { --reveal-delay: 280ms; }
+.reveal--stagger > .reveal:nth-child(6) { --reveal-delay: 350ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

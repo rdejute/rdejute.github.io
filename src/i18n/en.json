@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "aria": "Primary navigation",
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "links": "Links",
+    "contact": "Contact"
+  },
+  "logo": {
+    "alt": "Raina DeJute — home"
+  },
+  "controls": {
+    "theme": "Toggle light and dark theme",
+    "language": "Switch language"
+  },
+  "field": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "footer": {
+    "tagline": "Empathy is my framework.",
+    "contactHeading": "Get in touch",
+    "emailLabel": "Email Raina",
+    "social": "Find me online",
+    "rights": "All rights reserved.",
+    "hint": "Need a hint?"
+  },
+  "home": {
+    "eyebrow": "Front-end first · Empathy-led",
+    "name": "Raina DeJute",
+    "role": "AI-native full-stack developer with a front-end heart",
+    "tagline": "Empathy is my framework.",
+    "intro": "Full-stack developer, front-end focused. I came up through human services before tech, and I bring that same discipline to delivery — shipping projects on time, scoped to what the client actually needs, not what's easy to build. React on the front, Spring Boot and Node behind it, AI-native from spec to ship.",
+    "ctaWork": "View my work",
+    "ctaContact": "Get in touch",
+    "portraitAlt": "Portrait of Raina DeJute",
+    "chips": {
+      "a": "Front-end first",
+      "b": "Empathy-led",
+      "c": "AI-native workflow"
+    },
+    "tech": {
+      "heading": "What I build with",
+      "intro": "A pragmatic, full-stack toolkit — chosen to fit the problem, not to pad a résumé."
+    },
+    "soft": {
+      "heading": "What I bring to a team",
+      "intro": "The human skills that came before the technical ones — and still lead the way."
+    },
+    "why": {
+      "heading": "Why I Build",
+      "body": "Before I wrote code, I spent years in human services — walking with people through recovery, crisis, and starting over. I learned to hear what someone needs before they can say it, and to build the conditions for them to feel safe. I do the same work now with different tools: I shape an interface the way I once arranged a room — so the person on the other side feels seen, and a little less stuck. That instinct is the throughline from who I was to what I build.",
+      "imageAlt": "Warm illustration of two people connecting"
+    },
+    "skills": {
+      "frontend": {
+        "title": "React & React Native",
+        "desc": "I build responsive, accessible interfaces in React — and take them cross-platform with React Native when a project needs to live on a phone."
+      },
+      "backend": {
+        "title": "Spring Boot & Node",
+        "desc": "On the server I design APIs in Spring Boot and Node that are predictable, documented, and kind to the next developer."
+      },
+      "data": {
+        "title": "SQL & MongoDB",
+        "desc": "I model data in both relational SQL and document-based MongoDB, choosing the shape that fits the problem instead of forcing one."
+      },
+      "ai": {
+        "title": "AI-native, spec-driven",
+        "desc": "I work spec-first with AI as a collaborator — writing clear specifications, then iterating on them so the code stays intentional, not improvised."
+      },
+      "resilience": {
+        "title": "Resilience",
+        "desc": "I've started over more than once and rebuilt with intention. Hard problems don't rattle me — they focus me."
+      },
+      "communication": {
+        "title": "Communication",
+        "desc": "Years of sitting with people in hard conversations taught me to be clear, calm, and honest — to raise a blocker early and explain a tradeoff without the jargon."
+      },
+      "accountability": {
+        "title": "Accountability",
+        "desc": "I work AI-native, but I own every line. I read what I generate, make sure I understand it, and take responsibility for what ships. The tool accelerates me; it doesn't excuse me."
+      },
+      "selfDirection": {
+        "title": "Self-direction",
+        "desc": "I don't wait to be handed a problem. I built a crypto risk dashboard and a route-aware grocery tool on my own — because I saw a need and started."
+      }
+    }
+  },
+  "portfolio": {
+    "heading": "Portfolio",
+    "intro": "Education, experience, and a few things I've built.",
+    "resume": "Download résumé (PDF)",
+    "education": { "heading": "Education" },
+    "work": { "heading": "Experience" },
+    "projects": {
+      "heading": "Projects",
+      "intro": "A mix of client-style builds and things I made because I saw a need."
+    },
+    "edu": {
+      "codeboxx": { "title": "Full-Stack Development Program", "org": "CodeBoxx Academy", "dates": "Mar 2026 – Jul 2026" },
+      "crps": { "title": "Certified Recovery Peer Specialist", "org": "Recovery peer specialist certification", "dates": "2025" },
+      "diploma": { "title": "High School Diploma", "org": "General education", "dates": "2016" }
+    },
+    "jobs": {
+      "coordinator": {
+        "title": "Student Success Coordinator",
+        "org": "CodeBoxx Academy",
+        "dates": "2026 – Present",
+        "desc": "I support students through an intensive full-stack program — unblocking them technically and personally, tracking progress, and keeping momentum going when the work gets hard."
+      },
+      "humanServices": {
+        "title": "Human Services",
+        "org": "Salvation Army (Resident Manager) · Volunteers of America (Peer Support Specialist)",
+        "dates": "Jan 2023 – Jan 2026",
+        "desc": "Years walking alongside people in recovery and crisis: peer support, de-escalation, and leadership up to Resident Manager. I built daily routines and community structures that helped vulnerable residents feel safe and stay stable."
+      }
+    },
+    "proj": {
+      "crypto": {
+        "name": "Crypto Analytics Dashboard",
+        "desc": "A logarithmic-regression DCA risk model that scores the market from 0 to 1 — turning noisy price and sentiment data into a single signal a person can actually read before they buy.",
+        "alt": "Screenshot of the crypto analytics risk dashboard"
+      },
+      "grocery": {
+        "name": "Route-Aware Grocery Tool",
+        "desc": "Builds your grocery list, then sequences it to match the real walking path through the store — so you shop in one pass instead of doubling back.",
+        "alt": "Illustration for the route-aware grocery shopping tool"
+      },
+      "rocket": {
+        "name": "Rocket Food Delivery (Mobile)",
+        "desc": "A React Native app on Expo talking to a Spring Boot backend: sign-in, restaurant browsing, menus, and order navigation — my first full mobile stack, end to end.",
+        "alt": "Screenshot of the Rocket Food Delivery mobile app"
+      },
+      "portfolio": {
+        "name": "This Portfolio",
+        "desc": "The site you're on — React + Vite, Supabase, and GitHub Actions, built AI-native and spec-first. Every feature started as a written spec before a line of code.",
+        "alt": "Illustration representing this portfolio site"
+      }
+    }
+  },
+  "links": {
+    "heading": "Links",
+    "intro": "Where to find me, and a couple of places that shaped how I think.",
+    "newTab": "opens in a new tab",
+    "items": {
+      "linkedin": {
+        "title": "LinkedIn",
+        "desc": "Connect with me professionally — my background, roles, and the human-services-to-developer story in full.",
+        "alt": "Raina DeJute on LinkedIn"
+      },
+      "github": {
+        "title": "GitHub",
+        "desc": "Browse the code behind my projects, including this portfolio.",
+        "alt": "Raina DeJute on GitHub"
+      },
+      "youtube": {
+        "title": "YouTube",
+        "desc": "Walkthrough videos for every module — solving LeetCode, explaining my code, and breaking down the concepts that trip people up.",
+        "alt": "Raina DeJute's YouTube channel"
+      },
+      "codeboxx": {
+        "title": "CodeBoxx",
+        "desc": "The full-stack program that shaped this chapter of my career — intensive, project-driven, and where this site was born.",
+        "alt": "CodeBoxx full-stack program"
+      },
+      "cryptoverse": {
+        "title": "Into The Cryptoverse",
+        "desc": "Benjamin Cowen's data-driven crypto analysis — the analytical work that inspired my crypto risk dashboard.",
+        "alt": "Into The Cryptoverse crypto analysis"
+      }
+    }
+  },
+  "contact": {
+    "heading": "Get in touch",
+    "intro": "Have a role, a project, or just want to say hello? Send a message — it lands straight in my inbox.",
+    "replyBadge": "Usually replies within a day",
+    "imageAlt": "Abstract illustration of a letter at the center of a warm, connected world",
+    "name": { "label": "Name", "placeholder": "Your name" },
+    "email": { "label": "Email", "placeholder": "you@example.com" },
+    "message": { "label": "Message", "placeholder": "What's on your mind?" },
+    "submit": "Send message",
+    "sending": "Sending…",
+    "unavailable": "The contact form is temporarily unavailable. Please email me directly.",
+    "errors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "message": "Please enter a message."
+    },
+    "feedback": {
+      "success": "Message sent! Thanks — I'll get back to you soon.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "login": {
+    "heading": "Admin login",
+    "email": { "label": "Email", "placeholder": "admin@example.com" },
+    "password": { "label": "Password", "placeholder": "Your password" },
+    "submit": "Log in",
+    "submitting": "Logging in…",
+    "error": "Invalid login credentials."
+  },
+  "backoffice": {
+    "heading": "Back Office",
+    "signedInAs": "Signed in as",
+    "logout": "Log out",
+    "loading": "Loading messages…",
+    "error": "Couldn't load messages. Please try again.",
+    "empty": "No messages yet.",
+    "view": "View",
+    "delete": "Delete",
+    "cols": {
+      "name": "Name",
+      "email": "Email",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "modal": {
+      "close": "Close"
+    }
+  },
+  "pages": {
+    "home": { "title": "Home", "placeholder": "Home content coming soon." },
+    "portfolio": { "title": "Portfolio", "placeholder": "Portfolio content coming soon." },
+    "links": { "title": "Links", "placeholder": "Links content coming soon." },
+    "contact": { "title": "Contact", "placeholder": "Contact content coming soon." }
+  }
+}

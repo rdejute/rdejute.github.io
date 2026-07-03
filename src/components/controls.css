@@ -1,0 +1,32 @@
+.control {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) * 0.5);
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  border-radius: var(--radius-md);
+  padding: calc(var(--space) * 0.75);
+  line-height: 0;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.control:hover {
+  border-color: var(--accent-cool);
+  background: var(--accent-cool-tint);
+}
+
+.control__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.control--lang {
+  line-height: 1;
+}
+
+.control__text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}

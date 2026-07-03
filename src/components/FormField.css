@@ -1,0 +1,155 @@
+/* Shared form styles — used by every form via FormField (Contact, Login, …). */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 0.75);
+}
+
+.field__label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.field__control {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: calc(var(--space) * 1.25) calc(var(--space) * 1.5);
+  transition: border-color 0.15s ease;
+}
+
+/* Password field with a reveal toggle. */
+.field__control-wrap {
+  position: relative;
+}
+
+.field__control--revealable {
+  padding-right: calc(var(--space) * 5.5);
+}
+
+.field__reveal {
+  position: absolute;
+  right: calc(var(--space) * 0.75);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+  transition: color 0.15s ease;
+}
+
+.field__reveal:hover {
+  color: var(--accent-cool);
+}
+
+.field__reveal-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+/* Eye toggles with a quick squash — a small morph as it swaps open/closed. */
+.field__reveal:active .field__reveal-icon {
+  transform: scale(0.78);
+}
+
+.field__control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Focus "care glow": only the field you're in is lit — a soft sage bloom. */
+.field__control:focus {
+  border-color: var(--accent-cool);
+  box-shadow: 0 0 0 4px var(--accent-cool-tint);
+}
+
+/* ---- Floating label variant (Contact) ---- */
+.field--float .field__floatwrap {
+  position: relative;
+}
+
+.field--float .field__label {
+  position: absolute;
+  left: calc(var(--space) * 1.5);
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0 calc(var(--space) * 0.5);
+  background: var(--surface);
+  color: var(--text-muted);
+  pointer-events: none;
+  transform-origin: left center;
+  transition:
+    top var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+/* Textarea rests its label near the top rather than vertically centered. */
+.field--float textarea.field__control ~ .field__label {
+  top: calc(var(--space) * 1.5);
+  transform: none;
+}
+
+/* Floated state: focused, or holding a value. */
+.field--float .field__control:focus ~ .field__label,
+.field--float .field__control:not(:placeholder-shown) ~ .field__label {
+  top: 0;
+  transform: translateY(-50%) scale(0.82);
+  color: var(--accent-cool-deep);
+}
+
+textarea.field__control {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.field__control--error,
+.field__control--error:focus {
+  border-color: var(--accent-warm);
+}
+
+.field__error {
+  color: var(--accent-warm);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Status banners — sage for success, terracotta for failure (no green/red tokens). */
+.form-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+  padding: calc(var(--space) * 1.25) calc(var(--space) * 1.5);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+}
+
+.form-status__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.form-status--success {
+  background: var(--accent-cool-tint);
+  color: var(--accent-cool-deep);
+  border: 1px solid var(--accent-cool);
+}
+
+.form-status--error {
+  background: color-mix(in srgb, var(--accent-warm) 14%, transparent);
+  color: var(--accent-warm);
+  border: 1px solid var(--accent-warm);
+}
